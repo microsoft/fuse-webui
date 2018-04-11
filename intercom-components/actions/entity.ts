@@ -21,6 +21,7 @@ export enum EntityActions {
 //tslint:disable:no-reserved-keywords
 export interface BaseEntity<TN> extends ErrorAction {
   target: TN;
+  asyncKey?: string;
 }
 
 export interface BeginInsert<T, TN> extends BaseEntity<TN> {
