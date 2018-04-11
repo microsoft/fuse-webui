@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "amd",
+    "moduleResolution": "node",
+    "lib": [
+      "es6",
+      "es2015",
+      "dom",
+      "scripthost"
+    ],
+    "jsx": "react",
+    "declaration": false,
+    "sourceMap": true,
+    "downlevelIteration": true
+  }
+}
