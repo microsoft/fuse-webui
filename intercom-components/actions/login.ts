@@ -40,3 +40,37 @@ export interface SetAccessTokenAction {
 export type LoginActions = LoginAction | LogoutAction |
   GetLoggedInUser | GetLoggedInUserSucceeded |
   SetAccessTokenAction;
+
+export function login(history): LoginAction {
+  return {
+    type: Actions.logIn,
+    history
+  };
+}
+
+export function logout(user?: UserInfo): LogoutAction {
+  return {
+    type: Actions.logOut,
+    user
+  };
+}
+
+export function getLoggedInUser(): GetLoggedInUser {
+  return {
+    type: Actions.getUser
+  };
+}
+
+export function getLoggedInUserSucceeded(user: UserInfo): GetLoggedInUserSucceeded {
+  return {
+    type: Actions.getUserResult,
+    user
+  };
+}
+
+export function setAccessToken(token: string): SetAccessTokenAction {
+  return {
+    type: Actions.setAccessToken,
+    token
+  };
+}

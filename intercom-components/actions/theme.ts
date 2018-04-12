@@ -9,3 +9,11 @@ export interface ThemeAction {
   key: keyof Preference;
   val: any;
 }
+
+export function updateTheme(key: keyof Preference, val: any): ThemeAction {
+  return {
+    type: ThemeActions.update,
+    key,
+    val
+  };
+}

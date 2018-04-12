@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { ActionNames } from '../actions';
+import { login, logout, updateTheme } from '../actions';
 import { BaseStore } from '../models';
 import { UserProfile, UserProfileActions, UserProfileAttributes } from './userProfile';
 export * from './userProfile';
@@ -19,16 +19,16 @@ function mapStateToProps(state: BaseStore): UserProfileAttributes {
 function mapDispatchToProps(dispatch: Dispatch<BaseStore>): UserProfileActions {
   return {
     logIn: history => {
-      dispatch({ type: ActionNames.login.logIn, history });
+      dispatch(login(history));
     },
     logOut: (user: UserInfo) => {
-      dispatch({ type: ActionNames.login.logOut, user });
+      dispatch(logout(user));
     },
     switchTheme: (val) => {
-      dispatch({ type: ActionNames.theme.update, key: 'theme', val });
+      dispatch(updateTheme('theme', val));
     },
     toggleCompact: (val) => {
-      dispatch({ type: ActionNames.theme.update, key: 'compact', val });
+      dispatch(updateTheme('compact', val));
     }
   };
 }
