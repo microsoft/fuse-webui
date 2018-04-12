@@ -1,5 +1,5 @@
 {
-  "name": "intercom.common",
+  "name": "@fuselab/webui",
   "version": "1.0.12",
   "description": "bot framework satellite mono repo",
   "main": "index.js",

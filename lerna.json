@@ -1,8 +1,8 @@
 {
   "lerna": "2.1.2",
   "packages": [
-    "intercom-shared",
-    "intercom-components"
+    "fuse-ui-shared",
+    "fuse-ui-fabric"
   ],
   "version": "0.0.1"
 }
