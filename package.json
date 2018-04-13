@@ -66,6 +66,6 @@
   "false": {},
   "repository": {
     "type": "git",
-    "url": "https://fuselabs.visualstudio.com/DefaultCollection/Intercom/_git/Intercom-WebUI-Common"
+    "url": "https://github.com/Microsoft/fuse-webui.git"
   }
 }
