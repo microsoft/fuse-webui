@@ -76,10 +76,10 @@ export class TreeNodeView<T> extends BaseComponent<TreeNodeViewProps<T>, TreeNod
     return (
       <div>
         <div className={this.nodeSelectClassName} onClick={this.selectNode} onContextMenu={this.toggleContextMenu} role='menu'>
-          <div className={classNames(this.props.getStyle(this), this.theme)[`level_${level}`]}>
+          <div className={classNames(this.props.getStyle(this), this.theme, this.props.hideRoot)[`level_${level}`]}>
             {this.renderIcon()}
             <span
-              className={classNames(this.props.getStyle(this), this.theme).name}
+              className={classNames(this.props.getStyle(this), this.theme, this.props.hideRoot).name}
               ref={this.setName}
               contentEditable={this.state.editing}
               onKeyPress={this.nameKeyPress}
@@ -134,11 +134,17 @@ export class TreeNodeView<T> extends BaseComponent<TreeNodeViewProps<T>, TreeNod
   private get nodeSelectClassName(): string {
     const styles = this.props.getStyle(this);
     const names = classNames(styles, this.theme);
+    const classes = [names.root];
+
     if (this.state.selected) {
-      return `${names.root} ${names.rootSelected}`;
+      classes.push(names.rootSelected);
     }
 
-    return names.root;
+    if (!this.parent && this.props.hideRoot) {
+      classes.push(names.hiddenRoot);
+    }
+
+    return classes.join(' ');
   }
 
   private get nodeIconClassName(): string {

@@ -57,7 +57,7 @@ export class TreeView<T> extends BaseComponent<TreeViewProps<T>, TreeViewState> 
 
     return (
       <section
-        className={classNames({ icon: null }, this.props.theme).container}
+        className={classNames({ icon: null, treeRoot: {} }, this.props.theme, this.props.hideRoot).container}
         onKeyDown={this.handleKey}
         role='menu'
         tabIndex={0}
@@ -281,7 +281,27 @@ export class TreeView<T> extends BaseComponent<TreeViewProps<T>, TreeViewState> 
   private get setRoot(): (x: ITreeNodeView) => void {
     return x => {
       this.root = x;
+      if (this.props.hideRoot && this.root) {
+        this.root.expand();
+      }
     };
+  }
+
+  private handleCollapse() {
+    if (this.selected != null) {
+      if (this.selected.node.type === 'container') {
+        // collapse the container if expanded
+        if (this.selected.expanded) {
+          this.selected.collapse();
+        }
+      } else {
+        const parent = this.selected.parent;
+        if (!this.props.hideRoot || this.root !== parent) {
+          this.select(parent);
+          parent.collapse();
+        }
+      }
+    }
   }
 
   private async handleKeyCommands(e: React.KeyboardEvent<HTMLElement>) {
@@ -321,18 +341,7 @@ export class TreeView<T> extends BaseComponent<TreeViewProps<T>, TreeViewState> 
         }
         break;
       case KeyCodes.left:
-        if (this.selected != null) {
-          if (this.selected.node.type === 'container') {
-            // collapse the container if expanded
-            if (this.selected.expanded) {
-              this.selected.collapse();
-            }
-          } else {
-            const parent = this.selected.parent;
-            this.select(parent);
-            parent.collapse();
-          }
-        }
+        this.handleCollapse();
         break;
       case 121: //F10
         if (e.shiftKey) {

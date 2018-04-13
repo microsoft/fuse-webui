@@ -20,12 +20,12 @@ function indents(total: number): IStyle[] {
   return result;
 }
 
-function indentStyles(maxLevel: number): { [key: string]: IStyle } {
+function indentStyles(maxLevel: number, hideRoot: boolean): { [key: string]: IStyle } {
   let result: { [key: string]: IStyle } = {};
   let index = 0;
   let seq = indents(maxLevel);
   for (let level of seq) {
-    result[`level_${index}`] = level;
+    result[`level_${hideRoot ? (index + 1) : index}`] = level;
     index++;
   }
 
@@ -56,13 +56,14 @@ function rootStyles(s: IStyleSet, theme: 'dark' | 'light'): IStyleSet {
     leaf: ['ms-Icon', 'ms-Icon--Document', s && s.icon],
     name: {
       outline: 'none'
-    }
+    },
+    hiddenRoot: { display: 'none' }
   };
 }
 
-const treeClassNames = (styles: IStyleSet, theme: 'dark' | 'light'): { [key: string]: string } => mergeStyleSets({
+const treeClassNames = (styles: IStyleSet, theme: 'dark' | 'light', hideRoot?: boolean): { [key: string]: string } => mergeStyleSets({
   ...rootStyles(styles, theme),
-  ...indentStyles(16)
+  ...indentStyles(16, hideRoot)
 });
 
 export default treeClassNames;

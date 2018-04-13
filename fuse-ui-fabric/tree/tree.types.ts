@@ -69,10 +69,11 @@ export interface TreeState<T> {
   selected: TreeNode<T>;
 }
 
-export type TreeNodeViewProps<T> = TreeNodeAttributes & TreeNodeActions & TreeDataProvider<T> & IBaseProps<ITreeNodeView>;
+export type TreeNodeViewProps<T> = TreeNodeAttributes & TreeViewConfig & TreeNodeActions & TreeDataProvider<T> & IBaseProps<ITreeNodeView>;
 
 export interface TreeViewConfig {
   readonly?: boolean;
+  hideRoot?: boolean;
 }
 
 export type TreeViewAttributes<T> = TreeNodeAttributes & { selectedData: TreeNode<T> } & TreeViewConfig & Preference;
