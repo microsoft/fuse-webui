@@ -27,12 +27,12 @@ export interface GetLoggedInUser extends ErrorAction {
   type: Actions.getUser;
 }
 
-export interface GetLoggedInUserSucceeded {
+export interface GetLoggedInUserSucceeded extends ErrorAction {
   type: Actions.getUserResult;
   user: UserInfo;
 }
 
-export interface SetAccessTokenAction {
+export interface SetAccessTokenAction extends ErrorAction {
   type: Actions.setAccessToken;
   token: string;
 }
