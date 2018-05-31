@@ -12,8 +12,20 @@ export interface LocalizationSpec {
   example?: string;
 }
 
+export interface NestedMap<T> {
+  [key: string]: T | NestedMap<T>;
+}
+
+export type LocalizedStrings = NestedMap<Localized>;
+
 function isSpec(x: object): x is LocalizationSpec {
   return Object.keys(x).indexOf('key') >= 0;
+}
+
+export function isLocalized(x: object): x is Localized {
+  const keys = Object.keys(x);
+
+  return keys && keys.length === 1 && keys[0] === 'value';
 }
 
 const templateRegex = /\{([0-9]+)\}/g;
@@ -58,4 +70,9 @@ export function __(arg: string | Localized | LocalizationSpec, ...rest: any[]): 
   }
 
   return formatString.apply(null, [arg.value, ...rest]);
+}
+
+export enum Locale {
+  en = 'en',
+  chs = 'chs'
 }

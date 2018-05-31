@@ -10,6 +10,7 @@
   },
   "exclude": [
     "lib",
+    "i18n/sample",
     "node_modules",
     "../node_modules"
   ]

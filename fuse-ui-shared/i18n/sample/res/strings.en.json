@@ -1,0 +1,26 @@
+{
+  "common": {
+    "ok": {
+      "value": "OK"
+    },
+    "cancel": {
+      "value": "Cancel"
+    },
+    "buttons": {
+      "save": {
+        "value": "Save"
+      },
+      "add": {
+        "value": "Add"
+      }
+    }
+  },
+  "user": {
+    "lastName": {
+      "value": "Last name"
+    },
+    "firstName": {
+      "value": "First name"
+    }
+  }
+}

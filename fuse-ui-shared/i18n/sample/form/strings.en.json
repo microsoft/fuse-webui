@@ -1,0 +1,20 @@
+{
+  "street": {
+    "value": "Street 1"
+  },
+  "street2": {
+    "value": "Street 2"
+  },
+  "city": {
+    "value": "City"
+  },
+  "state": {
+    "value": "State or Province"
+  },
+  "zip": {
+    "value": "Zip/Postal code"
+  },
+  "country": {
+    "value": "Country/Region"
+  }
+}
