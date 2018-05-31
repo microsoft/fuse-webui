@@ -10,4 +10,5 @@ export * from './timePicker';
 export * from './datetimePicker';
 export * from './userProfile';
 export * from './logoHeader';
+export * from './topNav';
 export * from './reducers';

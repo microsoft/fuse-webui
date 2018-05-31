@@ -4,12 +4,14 @@ import { Link } from 'office-ui-fabric-react/lib/Link';
 import * as React from 'react';
 import { Preference } from '../themes';
 import { History, withRouter, WithRouter } from '../withRouter';
+import classNames from './userProfile.classNames';
 import { UserInfo } from './userProfile.types';
 /* tslint:disable:no-use-before-declare */
 
 export interface UserProfileAttributes extends Preference {
   loggedIn: boolean;
   userInfo?: UserInfo;
+  darkTopNav?: boolean;
 }
 
 export interface UserProfileActions {
@@ -40,11 +42,11 @@ const signedInUser = (u: UserInfo, props: UserProfileProps) => {
 export type UserProfileProps = UserProfileAttributes & UserProfileActions & WithRouter<UserProfileAttributes>;
 const inner = (props: UserProfileProps) => {
   const loginLink = !props.loggedIn ?
-    <Link onClick={handleClick(() => props.logIn(props.history))}>Sign in</Link> :
+    <Link className={classNames(props.darkTopNav ? 'dark' : 'light').link} onClick={handleClick(() => props.logIn(props.history))}>Sign in</Link> :
     null;
 
   return (
-    <div>
+    <div className={classNames(props.darkTopNav ? 'dark' : 'light').root} >
       {!props.loggedIn ? loginLink : signedInUser(props.userInfo, props)}
     </div>);
 };

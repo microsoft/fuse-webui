@@ -4,11 +4,12 @@ const logoHeaderClassNames = (): { [key: string]: string } => mergeStyleSets({
   root: {
     width: '100%',
     display: 'flex',
-    flexShrink: 0,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   logo: {
-    maxHeight: 23
+    maxHeight: 23,
+    paddingLeft: 8
   }
 
 });
