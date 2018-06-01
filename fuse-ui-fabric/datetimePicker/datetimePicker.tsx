@@ -1,6 +1,6 @@
 import { lazy } from '@fuselab/ui-shared';
 import { BaseComponent } from '@uifabric/utilities/lib';
-import { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib/DatePicker';
+import { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib-commonjs/DatePicker';
 import * as React from 'react';
 import { ClockTime, getD24hour, TimePicker, TimePickerProps } from '../timePicker';
 import classNames from './datetimePicker.classNames';

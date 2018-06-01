@@ -1,6 +1,6 @@
 import { lazy } from '@fuselab/ui-shared';
 import { BaseComponent } from '@uifabric/utilities/lib';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { TextField } from 'office-ui-fabric-react/lib-commonjs/TextField';
 import * as React from 'react';
 import { EnumDropdown, EnumDropdownProps } from '../enumDropdown';
 import classNames from './timePicker.classNames';

@@ -1,7 +1,7 @@
 import { Deferred, lazy } from '@fuselab/ui-shared';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { Dialog, DialogFooter, DialogType, IDialogContentProps } from 'office-ui-fabric-react/lib/Dialog';
-import { BaseComponent, IBaseProps } from 'office-ui-fabric-react/lib/Utilities';
+import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
+import { Dialog, DialogFooter, DialogType, IDialogContentProps } from 'office-ui-fabric-react/lib-commonjs/Dialog';
+import { BaseComponent, IBaseProps } from 'office-ui-fabric-react/lib-commonjs/Utilities';
 import * as React from 'react';
 import { DialogState, IDialogBase } from './dialog.types';
 

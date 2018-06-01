@@ -1,5 +1,5 @@
 import { lazy } from '@fuselab/ui-shared';
-import { ActionButton, CommandButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
+import { ActionButton, CommandButton, IButtonProps } from 'office-ui-fabric-react/lib-commonjs/Button';
 import * as React from 'react';
 
 export interface ButtonProps<T> extends IButtonProps {

@@ -1,6 +1,6 @@
 import { createDeferred, first, last, lazy, trackEvent } from '@fuselab/ui-shared';
 import { BaseComponent, KeyCodes } from '@uifabric/utilities/lib';
-import { ContextualMenu, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { ContextualMenu, IContextualMenuItem } from 'office-ui-fabric-react/lib-commonjs/ContextualMenu';
 import * as React from 'react';
 import { ConfirmDialog, IConfirmDialog } from '../dialogs';
 import classNames from './tree.classNames';

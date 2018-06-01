@@ -1,6 +1,7 @@
 /* tslint:disable:no-use-before-declare */
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { ITextField, TextField } from 'office-ui-fabric-react/lib/TextField';
+import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
+import { Link } from 'office-ui-fabric-react/lib-commonjs/Link';
+import { ITextField, TextField } from 'office-ui-fabric-react/lib-commonjs/TextField';
 import * as React from 'react';
 /* tslint:enable:no-use-before-declare */
 
@@ -18,8 +19,8 @@ export const LoginForm = (props: LoginFormAction) => {
   return (
     <div>
       <ol>
-        <li><a href='https://scratch.botframework.com/identity/signin' target='_blank' rel='noopener noreferrer'>Login Scratch</a></li>
-        <li><a target='_blank' rel='noopener noreferrer' href='//scratch.botframework.com/identity/token'>Get token JSON</a></li>
+        <li><Link href='https://scratch.botframework.com/identity/signin' target='_blank' rel='noopener noreferrer'>Login Scratch</Link></li>
+        <li><Link target='_blank' rel='noopener noreferrer' href='//scratch.botframework.com/identity/token'>Get token JSON</Link></li>
         <li>copy the token text and paste below</li>
       </ol>
       <TextField componentRef={setTa} rows={20} cols={80} multiline={true} />

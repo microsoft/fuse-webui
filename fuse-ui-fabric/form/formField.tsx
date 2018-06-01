@@ -1,6 +1,6 @@
 /* tslint:disable:no-use-before-declare */
-import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
-import { BaseComponent, IBaseProps } from 'office-ui-fabric-react/lib/Utilities';
+import { TooltipHost } from 'office-ui-fabric-react/lib-commonjs/Tooltip';
+import { BaseComponent, IBaseProps } from 'office-ui-fabric-react/lib-commonjs/Utilities';
 import * as React from 'react';
 import * as _ from 'underscore';
 import classNames from './form.classNames';

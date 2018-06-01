@@ -1,6 +1,6 @@
 import { lazy } from '@fuselab/ui-shared';
 import { BaseComponent } from '@uifabric/utilities/lib';
-import { DetailsList, IDetailsListProps } from 'office-ui-fabric-react/lib/DetailsList';
+import { DetailsList, IDetailsListProps } from 'office-ui-fabric-react/lib-commonjs/DetailsList';
 import * as React from 'react';
 import { asyncState } from '../decorators/asyncState';
 import { AsyncComponentState, AsyncState, IAsyncComponent } from '../models';

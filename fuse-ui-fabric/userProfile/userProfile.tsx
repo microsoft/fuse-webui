@@ -1,6 +1,7 @@
 /* tslint:disable:no-use-before-declare */
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { Link } from 'office-ui-fabric-react/lib/Link';
+import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
+import { Link } from 'office-ui-fabric-react/lib-commonjs/Link';
+import { getTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 import * as React from 'react';
 import { Preference } from '../themes';
 import { History, withRouter, WithRouter } from '../withRouter';
@@ -41,12 +42,22 @@ const signedInUser = (u: UserInfo, props: UserProfileProps) => {
 
 export type UserProfileProps = UserProfileAttributes & UserProfileActions & WithRouter<UserProfileAttributes>;
 const inner = (props: UserProfileProps) => {
-  const loginLink = !props.loggedIn ?
-    <Link className={classNames(props.darkTopNav ? 'dark' : 'light').link} onClick={handleClick(() => props.logIn(props.history))}>Sign in</Link> :
+  let theme = getTheme();
+  if (props.darkTopNav) {
+    theme = { ...theme, semanticColors: { ...theme.semanticColors, link: 'white', linkHovered: '#d0d0d0' } };
+  }
+
+  const loginLink = !props.loggedIn ? (
+    <Link
+      theme={theme}
+      onClick={handleClick(() => props.logIn(props.history))}
+    >
+      Sign in
+    </Link>) :
     null;
 
   return (
-    <div className={classNames(props.darkTopNav ? 'dark' : 'light').root} >
+    <div className={classNames().root} >
       {!props.loggedIn ? loginLink : signedInUser(props.userInfo, props)}
     </div>);
 };

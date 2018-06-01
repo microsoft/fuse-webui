@@ -1,5 +1,5 @@
 import { enumNames, lazy } from '@fuselab/ui-shared';
-import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
+import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib-commonjs/Dropdown';
 import * as React from 'react';
 
 export interface DropdownAttributes<T> {

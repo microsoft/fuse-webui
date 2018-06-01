@@ -2,8 +2,8 @@
 import { lazy } from '@fuselab/ui-shared';
 import { IconNames } from '@uifabric/icons';
 import { BaseComponent, IBaseProps } from '@uifabric/utilities/lib';
-import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
-import { IContextualMenu, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { CommandBar } from 'office-ui-fabric-react/lib-commonjs/CommandBar';
+import { IContextualMenu, IContextualMenuItem } from 'office-ui-fabric-react/lib-commonjs/ContextualMenu';
 import * as React from 'react';
 import { commandBarClassNames, Preference } from '../themes';
 import { History, WithRouter } from '../withRouter';
