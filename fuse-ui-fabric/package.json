@@ -25,7 +25,9 @@
     },
     "testMatch": [
       "**/*.spec.(ts|tsx)"
-    ]
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage"
   },
   "author": "hailiu@microsoft.com",
   "license": "MIT",

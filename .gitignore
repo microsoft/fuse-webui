@@ -3,3 +3,4 @@ built/
 .DS_Store
 lerna-debug.log
 lib
+coverage

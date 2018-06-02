@@ -12,3 +12,4 @@ export * from './userProfile';
 export * from './logoHeader';
 export * from './topNav';
 export * from './reducers';
+export * from './utilities';
