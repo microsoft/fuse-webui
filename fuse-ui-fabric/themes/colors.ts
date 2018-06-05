@@ -4,6 +4,7 @@ import * as _ from 'underscore';
 export function invertTheme(): ITheme {
   const theme = getTheme();
   theme.palette = invertColors(theme.palette);
+  theme.isInverted = true;
 
   return loadTheme(theme);
 }

@@ -1,6 +1,6 @@
 {
   "name": "@fuselab/ui-shared",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -21,7 +21,9 @@
     },
     "testMatch": [
       "**/*.spec.(ts|tsx)"
-    ]
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage"
   },
   "author": "hailiu@microsoft.com",
   "license": "MIT",
