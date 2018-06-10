@@ -1,0 +1,55 @@
+{
+  "name": "@fuselab/ui-adal",
+  "version": "1.1.0",
+  "description": "azure login ui",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "build-node": "tsc -p tsconfig.node.json & webpack --config webpack.node.js",
+    "build-all": "webpack & npm run build-node",
+    "tslint": "tslint -c tslint.json -t stylish --project tsconfig.json"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "applicationinsights-js": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/*.spec.(ts|tsx)"
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage"
+  },
+  "author": "hailiu@microsoft.com",
+  "license": "MIT",
+  "dependencies": {
+    "@fuselab/ui-shared": "^1.1.0",
+    "adal-angular": "^1.0.17"
+  },
+  "devDependencies": {
+    "@types/adal-angular": "^1.0.1",
+    "@types/fetch-mock": "^6.0.3",
+    "fetch-mock": "^6.4.4",
+    "jasmine": "^2.9.0",
+    "jest": "^22.1.4",
+    "tslint": "~5.9.1",
+    "tslint-microsoft-contrib": "~5.0.2",
+    "tslint-react": "~3.4.0",
+    "typescript": "~2.6.2",
+    "webpack": "^3.10.0"
+  },
+  "peerDependencies": {
+    "react": "~16.3.2",
+    "react-dom": "~16.3.2",
+    "whatwg-fetch": "^2.0.3"
+  }
+}

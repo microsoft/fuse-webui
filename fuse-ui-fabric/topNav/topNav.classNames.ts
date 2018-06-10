@@ -14,7 +14,10 @@ const topNavClassNames = (): { [key: string]: string } => mergeStyleSets({
   icon: [{
     fontSize: 23,
     padding: 8
-  }, 'ms-bgColor-themeDark--hover', 'ms-Icon']
+  }, 'ms-bgColor-themeDark--hover', 'ms-Icon'],
+  activeIcon: [
+    'ms-bgColor-white', 'ms-fontColor-neutralDark', 'ms-bgColor-white--hover'
+  ]
 });
 
 export default topNavClassNames;

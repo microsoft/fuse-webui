@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.react.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "./lib",
+    "declaration": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "../node_modules/@types",
+      "../../node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "lib",
+    "node_modules",
+    "../node_modules"
+  ]
+}
