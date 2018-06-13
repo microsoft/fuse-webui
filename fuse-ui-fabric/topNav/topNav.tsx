@@ -1,12 +1,12 @@
 import { lazy } from '@fuselab/ui-shared/lib';
 import { IBaseProps, KeyCodes } from '@uifabric/utilities';
-import { IPanel, IPanelProps, Panel, PanelType } from 'office-ui-fabric-react/lib-commonjs/Panel';
+import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
+import { IPanelProps, Panel, PanelType } from 'office-ui-fabric-react/lib-commonjs/Panel';
 import { BaseComponent } from 'office-ui-fabric-react/lib-commonjs/Utilities';
 import * as React from 'react';
 import { LogoHeader } from '../logoHeader';
 import { User } from '../userProfile';
 import classNames from './topNav.classNames';
-import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
 
 export enum TopNavPanels {
   none = 'none',
@@ -38,8 +38,6 @@ const panelIcons = {
  * settings, feedback, help, and user login/logout widget out the right.
  */
 export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
-  private _panel: IPanel;
-
   constructor(props: TopNavProps) {
     super(props);
     this.state = { openPanel: TopNavPanels.none };
@@ -63,7 +61,6 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
         </div>
         <Panel
           {...panelProps}
-          componentRef={this.setPanel}
           isOpen={panel !== TopNavPanels.none}
           onDismiss={this.onPanelDismiss}
         >
@@ -144,13 +141,6 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
         <DefaultButton onClick={this.onPanelDismiss} className={classNames().wafflePanelHeader}><i className='ms-Icon ms-Icon--Waffle' /></DefaultButton>
       </div>
     );
-  }
-
-  @lazy()
-  private get setPanel(): (p: IPanel) => void {
-    return p => {
-      this._panel = p;
-    };
   }
 
   @lazy()
