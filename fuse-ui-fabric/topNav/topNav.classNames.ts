@@ -17,7 +17,16 @@ const topNavClassNames = (): { [key: string]: string } => mergeStyleSets({
   }, 'ms-bgColor-themeDark--hover', 'ms-Icon'],
   activeIcon: [
     'ms-bgColor-white', 'ms-fontColor-neutralDark', 'ms-bgColor-white--hover'
-  ]
+  ],
+  wafflePanelHeader: {
+    fontSize: 23,
+    width: 32,
+    height: 32,
+    minWidth: 'none',
+    minHeight: 'none',
+    marginTop: 4,
+    marginLeft: 4
+  }
 });
 
 export default topNavClassNames;

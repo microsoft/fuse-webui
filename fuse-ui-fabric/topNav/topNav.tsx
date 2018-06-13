@@ -1,11 +1,12 @@
 import { lazy } from '@fuselab/ui-shared/lib';
 import { IBaseProps, KeyCodes } from '@uifabric/utilities';
-import { IPanelProps, Panel, PanelType } from 'office-ui-fabric-react/lib-commonjs/Panel';
+import { IPanel, IPanelProps, Panel, PanelType } from 'office-ui-fabric-react/lib-commonjs/Panel';
 import { BaseComponent } from 'office-ui-fabric-react/lib-commonjs/Utilities';
 import * as React from 'react';
 import { LogoHeader } from '../logoHeader';
 import { User } from '../userProfile';
 import classNames from './topNav.classNames';
+import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
 
 export enum TopNavPanels {
   none = 'none',
@@ -37,6 +38,8 @@ const panelIcons = {
  * settings, feedback, help, and user login/logout widget out the right.
  */
 export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
+  private _panel: IPanel;
+
   constructor(props: TopNavProps) {
     super(props);
     this.state = { openPanel: TopNavPanels.none };
@@ -60,6 +63,7 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
         </div>
         <Panel
           {...panelProps}
+          componentRef={this.setPanel}
           isOpen={panel !== TopNavPanels.none}
           onDismiss={this.onPanelDismiss}
         >
@@ -125,7 +129,27 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
   @lazy()
   private get panelProps(): { [key: string]: IPanelProps } {
     return {
-      [TopNavPanels.apps]: { type: PanelType.smallFixedNear }
+      [TopNavPanels.apps]: {
+        type: PanelType.smallFixedNear,
+        onRenderNavigation: this.renderWaffleHeader,
+        layerProps: { styles: { content: { selectors: { '.ms-Panel-content': { paddingLeft: 20, paddingRight: 20 } } } } }
+      }
+    };
+  }
+
+  @lazy()
+  private get renderWaffleHeader(): (props: IPanelProps, defaultRender?: (props?: IPanelProps) => JSX.Element | null) => JSX.Element {
+    return (props, render) => (
+      <div>
+        <DefaultButton onClick={this.onPanelDismiss} className={classNames().wafflePanelHeader}><i className='ms-Icon ms-Icon--Waffle' /></DefaultButton>
+      </div>
+    );
+  }
+
+  @lazy()
+  private get setPanel(): (p: IPanel) => void {
+    return p => {
+      this._panel = p;
     };
   }
 
