@@ -13,6 +13,9 @@ export interface Waffle {
 
 export interface MainNavProps {
   waffles: Waffle[];
+  //tslint:disable:prefer-method-signature
+  renderFeedback?: () => JSX.Element;
+  renderFeedbackFooter?: () => JSX.Element;
 }
 
 function renderWaffles(waffles: Waffle[]): JSX.Element {
@@ -34,17 +37,34 @@ function renderNavPanelWithProps(props: MainNavProps, panel: TopNavPanels): JSX.
   switch (panel) {
     case TopNavPanels.apps:
       return renderWaffles(props.waffles);
+    case TopNavPanels.feedback:
+      if (props.renderFeedback) {
+        return props.renderFeedback();
+      }
     default:
   }
 
   return <p>Panel '{panel}' render not defined</p>;
 }
 
+function renderNavPanelFooter(props: MainNavProps, panel: TopNavPanels): JSX.Element {
+  switch (panel) {
+    case TopNavPanels.feedback:
+      if (props.renderFeedbackFooter) {
+        return props.renderFeedbackFooter();
+      }
+    default:
+  }
+
+  return null;
+}
+
 export const MainNav = (props: MainNavProps) => {
   const renderNavPanel = renderNavPanelWithProps.bind(null, props);
+  const renderFooter = renderNavPanelFooter.bind(null, props);
 
   return (
     <header className={classNames().root}>
-      <TopNav renderNavPanel={renderNavPanel} />
+      <TopNav renderNavPanel={renderNavPanel} renderNavPanelFooter={renderFooter} />
     </header>);
 };
