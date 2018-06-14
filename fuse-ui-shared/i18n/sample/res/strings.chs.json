@@ -1,0 +1,26 @@
+{
+  "common": {
+    "ok": {
+      "value": "好的"
+    },
+    "cancel": {
+      "value": "取消"
+    },
+    "buttons": {
+      "save": {
+        "value": "存储"
+      },
+      "add": {
+        "value": "添加"
+      }
+    }
+  },
+  "user": {
+    "lastName": {
+      "value": "姓"
+    },
+    "firstName": {
+      "value": "名"
+    }
+  }
+}

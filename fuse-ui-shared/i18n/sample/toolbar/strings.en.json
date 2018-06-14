@@ -1,0 +1,11 @@
+{
+  "copy": {
+    "value": "Copy"
+  },
+  "cut": {
+    "value": "Cut"
+  },
+  "paste": {
+    "value": "Paste"
+  }
+}
