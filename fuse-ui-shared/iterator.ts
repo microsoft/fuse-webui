@@ -83,3 +83,9 @@ export function* reverse<T>(src: IterableIterator<T>): IterableIterator<T> {
     yield e;
   }
 }
+
+export function* asIter<T>(a: T[]) {
+  for (const v of a) {
+    yield v;
+  }
+}

@@ -1,5 +1,5 @@
 ///<reference types='jasmine'/>
-import { filter, first, last, map, reduce } from './iterator';
+import { asArray, asIter, filter, first, last, map, reduce } from './iterator';
 
 function* fib10(): IterableIterator<number> {
   let prev = 0;
@@ -36,4 +36,11 @@ describe('iterator helpers', () => {
     const evenSums = reduce(filter(fib10(), x => x % 2 === 0), (s, x) => s + x, 0);
     expect(evenSums).toBe(44);
   });
+
+  it('asIter', () => {
+    const arr = [1, 2, 3];
+    const iter = asIter(arr);
+    const result = asArray(iter);
+    expect(result).toEqual(arr);
+  })
 });
