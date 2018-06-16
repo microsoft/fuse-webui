@@ -19,6 +19,7 @@ export enum TopNavPanels {
 
 export interface TopNavProps extends IBaseProps {
   renderNavPanel(panel: TopNavPanels): JSX.Element;
+  renderNavPanelFooter(panel: TopNavPanels): JSX.Element;
 }
 
 export interface TopNavState {
@@ -130,6 +131,13 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
         type: PanelType.smallFixedNear,
         onRenderNavigation: this.renderWaffleHeader,
         layerProps: { styles: { content: { selectors: { '.ms-Panel-content': { paddingLeft: 20, paddingRight: 20 } } } } }
+      },
+      [TopNavPanels.feedback]: {
+        type: PanelType.smallFixedFar,
+        headerText: 'Send us feedback',
+        isFooterAtBottom: true,
+        onRenderFooterContent: this.props.renderNavPanelFooter.bind(this.props, TopNavPanels.feedback),
+        layerProps: { styles: { root: { top: 40, height: 'calc(100vh - 40px)' } } }
       }
     };
   }

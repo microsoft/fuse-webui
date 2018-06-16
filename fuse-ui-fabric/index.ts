@@ -14,3 +14,4 @@ export * from './topNav';
 export * from './reducers';
 export * from './utilities';
 export * from './mainNav';
+export * from './feedbackPanel';
