@@ -46,11 +46,15 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
 
   public render(): JSX.Element {
     const panel = this.state.openPanel;
-    const panelContent = this.props.renderNavPanel(panel);
-    const panelProps = this.panelProps[panel] || { type: PanelType.smallFixedFar, layerProps: { styles: { root: { top: 40 } } } };
+    const panelContent = panel !== TopNavPanels.none ? this.props.renderNavPanel(panel) : null;
+    const panelProps = {
+      type: PanelType.smallFixedFar,
+      layerProps: { styles: { root: { top: 40, height: 'calc(100vh - 40px)' } } },
+      ...(this.panelProps[panel] || {})
+    };
 
     return (
-      <header className={classNames().root}>
+      <header className={classNames().root} >
         <div className={classNames().inner}>
           {this.renderNavButton(TopNavPanels.apps, this.navClickApps)}
           <LogoHeader />
@@ -60,14 +64,23 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
           {this.renderNavButton(TopNavPanels.help, this.navClickHelp)}
           <User darkTopNav={true} />
         </div>
-        <Panel
-          {...panelProps}
-          isOpen={panel !== TopNavPanels.none}
-          onDismiss={this.onPanelDismiss}
-        >
-          {panelContent}
-        </Panel>
+        {this.renderPanel(panelProps, panelContent)}
       </header>);
+  }
+
+  private renderPanel(panelProps: IPanelProps, panelContent: JSX.Element): JSX.Element {
+    if (this.state.openPanel === TopNavPanels.none) {
+      return null;
+    }
+
+    return (
+      <Panel
+        {...panelProps}
+        isOpen={true}
+        onDismiss={this.onPanelDismiss}
+      >
+        {panelContent}
+      </Panel>);
   }
 
   private renderNavButton(panel: TopNavPanels, handler: React.MouseEventHandler<HTMLElement>): JSX.Element {
@@ -130,14 +143,20 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
       [TopNavPanels.apps]: {
         type: PanelType.smallFixedNear,
         onRenderNavigation: this.renderWaffleHeader,
-        layerProps: { styles: { content: { selectors: { '.ms-Panel-content': { paddingLeft: 20, paddingRight: 20 } } } } }
+        layerProps: {
+          styles: {
+            root: { top: 0, height: '100vh' },
+            content: { selectors: { '.ms-Panel-content': { paddingLeft: 20, paddingRight: 20 } } }
+          }
+        }
       },
       [TopNavPanels.feedback]: {
-        type: PanelType.smallFixedFar,
         headerText: 'Send us feedback',
         isFooterAtBottom: true,
-        onRenderFooterContent: this.props.renderNavPanelFooter.bind(this.props, TopNavPanels.feedback),
-        layerProps: { styles: { root: { top: 40, height: 'calc(100vh - 40px)' } } }
+        onRenderFooterContent: this.props.renderNavPanelFooter.bind(this.props, TopNavPanels.feedback)
+      },
+      [TopNavPanels.notification]: {
+        headerText: 'Notifications'
       }
     };
   }

@@ -16,6 +16,7 @@ export interface MainNavProps {
   //tslint:disable:prefer-method-signature
   renderFeedback?: () => JSX.Element;
   renderFeedbackFooter?: () => JSX.Element;
+  renderNotifications?: () => JSX.Element;
 }
 
 function renderWaffles(waffles: Waffle[]): JSX.Element {
@@ -40,6 +41,11 @@ function renderNavPanelWithProps(props: MainNavProps, panel: TopNavPanels): JSX.
     case TopNavPanels.feedback:
       if (props.renderFeedback) {
         return props.renderFeedback();
+      }
+      break;
+    case TopNavPanels.notification:
+      if (props.renderNotifications) {
+        return props.renderNotifications();
       }
     default:
   }

@@ -3,6 +3,7 @@ import { Actions as AsyncStateActions } from './asyncState';
 import { EntityActions } from './entity';
 import { Actions as _feedback } from './feedback';
 import { Actions as _login } from './login';
+import { ActionNames as _notification } from './notification';
 import { ThemeActions } from './theme';
 import { Actions as _tree } from './tree';
 
@@ -18,4 +19,5 @@ export namespace ActionNames {
   export import annotations = AnnotationActions;
   export import asyncState = AsyncStateActions;
   export import feedback = _feedback;
+  export import notification = _notification;
 }
