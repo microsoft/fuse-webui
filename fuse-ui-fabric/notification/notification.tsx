@@ -1,5 +1,4 @@
 import { lazy } from '@fuselab/ui-shared/decorators';
-import { IconNames } from '@uifabric/icons';
 import { BaseComponent } from '@uifabric/utilities';
 import { IconButton } from 'office-ui-fabric-react/lib-commonjs/Button';
 import { getTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';

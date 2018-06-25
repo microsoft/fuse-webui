@@ -33,7 +33,7 @@ const topNavClassNames = (): { [key: string]: string } => mergeStyleSets({
   activeIcon: [
     'ms-bgColor-white', 'ms-fontColor-neutralDark', 'ms-bgColor-white--hover', {
       selectors: {
-        '$counter': {
+        $counter: {
           backgroundColor: getTheme().palette.neutralLight
         }
       }
