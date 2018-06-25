@@ -17,6 +17,7 @@ export interface MainNavProps {
   renderFeedback?: () => JSX.Element;
   renderFeedbackFooter?: () => JSX.Element;
   renderNotifications?: () => JSX.Element;
+  getPanelCounter?: (panel: TopNavPanels) => number;
 }
 
 function renderWaffles(waffles: Waffle[]): JSX.Element {
@@ -65,12 +66,21 @@ function renderNavPanelFooter(props: MainNavProps, panel: TopNavPanels): JSX.Ele
   return null;
 }
 
+function getPanelCounter(props: MainNavProps, panel: TopNavPanels): number {
+  if (props.getPanelCounter) {
+    return props.getPanelCounter(panel);
+  }
+
+  return 0;
+}
+
 export const MainNav = (props: MainNavProps) => {
   const renderNavPanel = renderNavPanelWithProps.bind(null, props);
   const renderFooter = renderNavPanelFooter.bind(null, props);
+  const getCount = getPanelCounter.bind(null, props);
 
   return (
     <header className={classNames().root}>
-      <TopNav renderNavPanel={renderNavPanel} renderNavPanelFooter={renderFooter} />
+      <TopNav renderNavPanel={renderNavPanel} renderNavPanelFooter={renderFooter} getPanelCount={getCount} />
     </header>);
 };

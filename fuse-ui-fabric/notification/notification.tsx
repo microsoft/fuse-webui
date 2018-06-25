@@ -44,7 +44,7 @@ export class NotificationCard extends BaseComponent<NotificationProps> {
         <div className={classNames().header}>
           <i className={iconClass} style={{ color: getIconColor(this.props.level) }} />
           <h3>{this.props.title}</h3>
-          <IconButton iconProps={{ iconName: IconNames.ChromeClose }} onClick={this.dismiss} />
+          <IconButton iconProps={{ iconName: 'ChromeClose' }} onClick={this.dismiss} />
         </div>
         <div className={classNames().content}>
           {this.props.children}

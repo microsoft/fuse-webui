@@ -18,6 +18,7 @@ export enum TopNavPanels {
 }
 
 export interface TopNavProps extends IBaseProps {
+  getPanelCount(panel: TopNavPanels): number;
   renderNavPanel(panel: TopNavPanels): JSX.Element;
   renderNavPanelFooter(panel: TopNavPanels): JSX.Element;
 }
@@ -53,15 +54,17 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
       ...(this.panelProps[panel] || {})
     };
 
+    const renderNavButton = this.renderNavButton.bind(this, this.props.getPanelCount);
+
     return (
       <header className={classNames().root} >
         <div className={classNames().inner}>
-          {this.renderNavButton(TopNavPanels.apps, this.navClickApps)}
+          {renderNavButton(TopNavPanels.apps, this.navClickApps)}
           <LogoHeader />
-          {this.renderNavButton(TopNavPanels.notification, this.navClickNotificaiton)}
-          {this.renderNavButton(TopNavPanels.settings, this.navClickSettings)}
-          {this.renderNavButton(TopNavPanels.feedback, this.navClickFeedback)}
-          {this.renderNavButton(TopNavPanels.help, this.navClickHelp)}
+          {renderNavButton(TopNavPanels.notification, this.navClickNotificaiton)}
+          {renderNavButton(TopNavPanels.settings, this.navClickSettings)}
+          {renderNavButton(TopNavPanels.feedback, this.navClickFeedback)}
+          {renderNavButton(TopNavPanels.help, this.navClickHelp)}
           <User darkTopNav={true} />
         </div>
         {this.renderPanel(panelProps, panelContent)}
@@ -83,7 +86,9 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
       </Panel>);
   }
 
-  private renderNavButton(panel: TopNavPanels, handler: React.MouseEventHandler<HTMLElement>): JSX.Element {
+  private renderNavButton(getCount: (p: TopNavPanels) => number, panel: TopNavPanels, handler: React.MouseEventHandler<HTMLElement>): JSX.Element {
+    const count = getCount(panel);
+
     return (
       <i
         role='button'
@@ -93,7 +98,9 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
         title={panel}
         onClick={handler}
         onKeyUp={this.keyActivate}
-      />
+      >
+        {(count > 0) ? <div className={classNames().counter}>{count}</div> : null}
+      </i>
     );
   }
 
