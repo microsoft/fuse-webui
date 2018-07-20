@@ -67,17 +67,18 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
           {renderNavButton(TopNavPanels.help, this.navClickHelp)}
           <User darkTopNav={true} />
         </div>
-        {this.renderPanel(panelProps, panelContent)}
+        {this.renderPanel(panel, panelProps, panelContent)}
       </header>);
   }
 
-  private renderPanel(panelProps: IPanelProps, panelContent: JSX.Element): JSX.Element {
+  private renderPanel(panel: TopNavPanels, panelProps: IPanelProps, panelContent: JSX.Element): JSX.Element {
     if (this.state.openPanel === TopNavPanels.none) {
       return null;
     }
 
     return (
       <Panel
+        key={`panel_${panel}`}
         {...panelProps}
         isOpen={true}
         onDismiss={this.onPanelDismiss}
