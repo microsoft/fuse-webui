@@ -6,7 +6,7 @@ import { AcquireTokenAction, ActionNames, Adal, SwitchTenantAction } from '../ac
 import { API_RESOURCES, listTenants, switchTenant } from '../adalContext';
 import { AdalStore } from '../store';
 
-function* getArmToken(action: AcquireTokenAction) {
+function* getAccessToken(action: AcquireTokenAction) {
   const authContext: AuthContext = yield select<AdalStore>(s => s.authContext);
   const resource = action.resource || API_RESOURCES.ARM;
   let token: string = null;
@@ -14,7 +14,8 @@ function* getArmToken(action: AcquireTokenAction) {
     const [t]: string[] = yield callbackToPromise<any[]>(authContext.acquireToken.bind(authContext), resource);
     token = t;
   } catch (error) {
-    if (error === 'interaction_required') {
+    const requireInteraction = error === 'interaction_required' || window.location.hash.startsWith('#error=interaction_required');
+    if (requireInteraction) {
       const [t]: string[] = yield callbackToPromise<any[]>(authContext.acquireTokenPopup.bind(authContext), resource, null, null);
       token = t;
     } else {
@@ -37,7 +38,7 @@ function* switchToTenant(action: SwitchTenantAction) {
 }
 
 function* watchForAcquireToken() {
-  yield takeLatest(ActionNames.adal.acquireToken, getArmToken);
+  yield takeLatest(ActionNames.adal.acquireToken, getAccessToken);
 }
 
 function* watchForListTenants() {
