@@ -2,13 +2,13 @@ import * as BaseActions from '@fuselab/ui-fabric/actions';
 import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
 import * as AuthContext from 'adal-angular';
 import { all, call, fork, put, select, take, takeLatest } from 'redux-saga/effects';
-import { ActionNames, Adal, SwitchTenantAction } from '../actions';
+import { AcquireTokenAction, ActionNames, Adal, SwitchTenantAction } from '../actions';
 import { API_RESOURCES, listTenants, switchTenant } from '../adalContext';
 import { AdalStore } from '../store';
 
-function* getArmToken() {
+function* getArmToken(action: AcquireTokenAction) {
   const authContext: AuthContext = yield select<AdalStore>(s => s.authContext);
-  const resource = API_RESOURCES.ARM;
+  const resource = action.resource || API_RESOURCES.ARM;
   let token: string = null;
   try {
     const [t]: string[] = yield callbackToPromise<any[]>(authContext.acquireToken.bind(authContext), resource);

@@ -15,3 +15,4 @@ export * from './reducers';
 export * from './utilities';
 export * from './mainNav';
 export * from './feedbackPanel';
+export * from './withAuth';

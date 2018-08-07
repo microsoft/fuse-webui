@@ -5,6 +5,7 @@ import { Actions } from './adal.types';
 //tslint:disable:no-reserved-keywords
 export interface AcquireTokenAction {
   type: Actions.acquireToken;
+  resource?: string;
 }
 
 export interface AcquireTokenActionResult extends ErrorAction {
@@ -32,6 +33,10 @@ export type AdalActions = AcquireTokenAction | AcquireTokenActionResult |
 export namespace Adal {
   export function acquireArmToken(): AcquireTokenAction {
     return { type: Actions.acquireToken };
+  }
+
+  export function acquireToken(resource: string): AcquireTokenAction {
+    return { type: Actions.acquireToken, resource };
   }
 
   export function acquireTokenResult(token: string): AcquireTokenActionResult {
