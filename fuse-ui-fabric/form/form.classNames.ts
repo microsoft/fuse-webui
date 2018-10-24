@@ -12,6 +12,18 @@ const formClassNames = (): { [key: string]: string } => mergeStyleSets({
         display: 'flex'
       }
     }
+  }],
+  inlineField: ['ms-GridCol', 'ms-sm12', 'ms-md8', 'ms-lg6', {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: 12,
+    selectors: {
+      '& >div:first-child': {
+        textAlign: 'right',
+        marginRight: 8,
+        minWidth: 120
+      }
+    }
   }]
 });
 

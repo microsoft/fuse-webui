@@ -33,7 +33,12 @@ export class EnumDropdown<T> extends React.Component<EnumDropdownProps<T>> {
   }
 
   private get options(): IDropdownOption[] {
-    return enumNames(this.props.enumType).map(
+    let names = enumNames(this.props.enumType);
+    if (names.length === 0) {
+      names = Object.keys(this.props.enumType);
+    }
+
+    return names.map(
       key => {
         return { key: this.props.enumType[key] as number, text: key };
       });
@@ -44,7 +49,16 @@ export class EnumDropdown<T> extends React.Component<EnumDropdownProps<T>> {
     const enumType = this.props.enumType;
 
     return (option, index) => {
-      this.props.change(enumType[enumType[option.key]]);
+      const key = option.key;
+      if (typeof key === 'string') {
+        const keyIndex = parseInt(key, 10);
+        if (isNaN(keyIndex)) {
+          this.props.change(key as any);
+
+          return;
+        }
+      }
+      this.props.change(enumType[enumType[key]]);
     };
   }
 }

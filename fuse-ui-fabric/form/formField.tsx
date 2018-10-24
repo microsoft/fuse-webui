@@ -10,6 +10,7 @@ export interface FormFieldAttributes {
   title: string;
   required?: boolean;
   placeholder?: string;
+  inline?: boolean;
   tooltip?: string | (() => JSX.Element);
   error?: string | (() => JSX.Element);
 }
@@ -26,7 +27,7 @@ export class FormField extends BaseComponent<FormFieldProps> {
 
   public render(): JSX.Element {
     return (
-      <div className={classNames().formField}>
+      <div className={this.props.inline ? classNames().inlineField : classNames().formField}>
         <div>
           {this.renderFieldInfo()}
         </div>
