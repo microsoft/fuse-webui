@@ -1,6 +1,6 @@
 export function* ancestors(element: HTMLElement): IterableIterator<HTMLElement> {
   let cur = element.parentElement;
-  while (cur !== null) {
+  while (cur) {
     yield cur;
     cur = cur.parentElement;
   }
