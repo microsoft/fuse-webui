@@ -7,11 +7,16 @@ export function* ancestors(element: HTMLElement): IterableIterator<HTMLElement> 
 }
 
 export function closest(element: HTMLElement, sel: string): HTMLElement {
-  for (const cur of ancestors(element)) {
+  const a = ancestors(element);
+  let iter = a.next();
+
+  while (!iter.done) {
+    const cur = iter.value;
     const m = cur.querySelector(sel);
     if (m) {
       return <any>m;
     }
+    iter = a.next();
   }
 
   return null;
