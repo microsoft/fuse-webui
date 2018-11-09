@@ -16,6 +16,8 @@ module.exports = Object.assign(core, {
   plugins: [
     new CopyPlugin([
       { from: './themes/seti/*.woff', to: '.' },
+      { from: './themes/fabric/*.woff*', to: '.' },
+      { from: './themes/fabric/*.css', to: '.' },
       { from: './themes/seti/*.json', to: '.' }
     ])
   ]
