@@ -1,5 +1,6 @@
 import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
 import * as fs from 'fs';
+import * as glob from 'glob';
 import * as path from 'path';
 
 export function ensurePath(filePath: string) {
@@ -22,4 +23,33 @@ export async function compareFile(src: string, target: string): Promise<boolean>
   const bufTarget = await readFileAsync(target);
 
   return bufSrc.compare(bufTarget) === 0;
+}
+
+export function isDir(dirPath: string): boolean {
+  return fs.lstatSync(dirPath).isDirectory();
+}
+
+export async function compareFolder(src: string, target: string): Promise<boolean> {
+  const srcFiles = await callbackToPromise<string[]>(glob, `${src}/**/*.*`);
+  const targetFiles = await callbackToPromise<string[]>(glob, `${target}/**/*`);
+
+  if (srcFiles.length !== targetFiles.length) {
+    return false;
+  }
+
+  for (const srcFile of srcFiles) {
+    const base = path.basename(srcFile);
+    const taretFile = targetFiles.find(x => path.basename(x) === base);
+
+    if (!taretFile) {
+      return false;
+    }
+    const same = await compareFile(srcFile, taretFile);
+
+    if (!same) {
+      return false;
+    }
+  }
+
+  return true;
 }
