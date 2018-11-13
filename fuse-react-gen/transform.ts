@@ -18,7 +18,7 @@ export function transformLine(data: Data, content: string): string {
   return transform(data);
 }
 
-export function transformFile(data: Data, src: string, target: string): Promise<void> {
+export async function transformFile(data: Data, src: string, target: string): Promise<void> {
   const output = createWriteStream(target);
   const lines = createInterface({
     input: createReadStream(src)
@@ -29,14 +29,12 @@ export function transformFile(data: Data, src: string, target: string): Promise<
     await callbackToPromise(output.write.bind(output), `${y}\n`);
   });
 
-  const result = new Promise<void>(resolve => {
+  return new Promise<void>(resolve => {
     lines.on('close', () => {
       lines.close();
       resolve();
     });
   });
-
-  return result;
 }
 
 export function transformFolder(data: Data, src: string, target: string): Link[] {
