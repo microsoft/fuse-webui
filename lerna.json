@@ -3,7 +3,8 @@
   "packages": [
     "fuse-ui-adal",
     "fuse-ui-shared",
-    "fuse-ui-fabric"
+    "fuse-ui-fabric",
+    "fuse-react-gen"
   ],
   "version": "0.0.1"
 }
