@@ -1,5 +1,4 @@
-import { callbackToPromise } from '@fuselab/ui-shared/lib/asyncUtils';
-import { createReadStream, createWriteStream } from 'fs';
+import { appendFileSync, createReadStream, createWriteStream } from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
 import { createInterface } from 'readline';
@@ -25,13 +24,14 @@ export async function transformFile(data: Data, src: string, target: string): Pr
     input: createReadStream(src)
   });
 
-  lines.on('line', async (x) => {
+  lines.on('line', (x) => {
     const y = transformLine(data, x);
-    await callbackToPromise(output.write.bind(output), `${y}\n`);
+    appendFileSync(target, `${y}\n`);
   });
 
   return new Promise<void>(resolve => {
     lines.on('close', () => {
+      output.close();
       lines.close();
       resolve();
     });

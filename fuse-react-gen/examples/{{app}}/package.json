@@ -1,0 +1,76 @@
+{
+  "name": "{{package}}",
+  "appName": "{{app}}",
+  "version": "{{version}}",
+  "description": "ReactJS app for {{app}} ",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "build-all": "webpack --config webpack.all.js",
+    "start": "webpack-dev-server",
+    "tslint": "tslint -c tslint.json -t stylish --project tsconfig.json"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "applicationinsights-js": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/*.spec.(ts|tsx)"
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage"
+  },
+  "author": "@fuselabe/react-gen",
+  "license": "MIT",
+  "dependencies": {
+    "@fuselab/ui-fabric": "^1.0.0",
+    "@fuselab/ui-shared": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@uifabric/icons": "~5.6.0",
+    "@uifabric/merge-styles": "~5.13.0",
+    "@uifabric/styling": "~5.20.0",
+    "@uifabric/utilities": "~5.19.0",
+    "enzyme": "^3.3.0",
+    "history": "~4.7.2",
+    "office-ui-fabric-react": "~6.1.2",
+    "react": "~16.3.2",
+    "react-dom": "~16.3.2",
+    "react-redux": "~5.0.6",
+    "react-router-dom": "~4.2.2",
+    "redux": "~3.7.2",
+    "redux-saga": "~0.16.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "@types/underscore": "^1.8.7",
+    "awesome-typescript-loader": "^3.4.1",
+    "css-loader": "^0.28.9",
+    "jasmine": "^2.9.0",
+    "jest": "^22.1.4",
+    "lerna": "^2.8.0",
+    "react-addons-test-utils": "~15.6.2",
+    "ts-jest": "~22.0.1",
+    "tslint": "~5.9.1",
+    "tslint-microsoft-contrib": "~5.0.2",
+    "tslint-react": "~3.4.0",
+    "underscore": "^1.8.3",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "publishConfig": {
+    "registry": "https://fuselabs.pkgs.visualstudio.com/_packaging/FuseNPM/npm/registry/"
+  }
+}

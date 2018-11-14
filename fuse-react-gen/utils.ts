@@ -1,4 +1,4 @@
-import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
+import { callbackToPromise } from '@fuselab/ui-shared/lib/asyncUtils';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
