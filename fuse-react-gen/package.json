@@ -24,6 +24,9 @@
     "testMatch": [
       "**/*.spec.(ts|tsx)"
     ],
+    "testPathIgnorePatterns": [
+      "/examples/"
+    ],
     "collectCoverage": true,
     "coverageDirectory": "./coverage"
   },
