@@ -5,7 +5,8 @@ const mainNavClassNames = (): { [key: string]: string } => mergeStyleSets({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    margin: '0 auto'
+    margin: '0 auto',
+    minHeight: 40
   },
   pivot: {
     width: 1200

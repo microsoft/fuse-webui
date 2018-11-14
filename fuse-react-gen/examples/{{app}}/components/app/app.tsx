@@ -27,7 +27,7 @@ if (pref.theme === 'dark') {
 }
 
 const waffles = [
-  { href: '/', iconName: 'Home' }
+  //{ href: '/', iconName: 'Home' }
 ] as Waffle[];
 
 const App = () => (
