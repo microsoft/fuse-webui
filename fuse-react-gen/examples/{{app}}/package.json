@@ -1,6 +1,7 @@
 {
   "name": "{{package}}",
   "appName": "{{app}}",
+  "aadAppId": "12916cf1-b629-4ddf-b699-5a7d3035b38e",
   "version": "{{version}}",
   "description": "ReactJS app for {{app}} ",
   "main": "index.ts",
@@ -33,6 +34,7 @@
   "author": "@fuselabe/react-gen",
   "license": "MIT",
   "dependencies": {
+    "@fuselab/ui-adal": "^1.1.3",
     "@fuselab/ui-fabric": "^1.0.0",
     "@fuselab/ui-shared": "^1.0.0"
   },

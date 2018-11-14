@@ -1,136 +1,53 @@
-import { ActionNames } from '@fuselab/ui-fabric/actions';
-import { GetLoggedInUser, LoginAction, LogoutAction, SetAccessTokenAction } from '@fuselab/ui-fabric/actions/login';
-import { BaseStore } from '@fuselab/ui-fabric/models';
-import { UserInfo } from '@fuselab/ui-fabric/userProfile';
-import { isLocalhost, sleep } from '@fuselab/ui-shared';
-import { all, call, fork, put, race, select, take, takeLatest } from 'redux-saga/effects';
-declare const BASENAME: string;
+import {
+  AdalAuthContext,
+  adalSagas,
+  UserResult
+} from '@fuselab/ui-adal';
+import { getLoggedInUserSucceeded } from '@fuselab/ui-fabric/actions/login';
+import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
+import { all, fork, put, select, takeLatest } from 'redux-saga/effects';
+import { ActionNames } from '../actions';
+import { Store } from '../store';
 
-const intercomTokenName = 'intercom-token';
-const bfAuthCookieHeaderName = 'x-bf-auth-cookie';
-
-function* checkLogin(action: LoginAction) {
-  if (isLocalhost()) {
-    const token = sessionStorage.getItem(intercomTokenName);
-    if (token) {
-      yield put({ type: ActionNames.login.setAccessToken, token });
-    } else {
-      yield call(action.history.push, { pathname: '/login' });
-    }
-  }
+function* loginAzure() {
+  const authContext: AdalAuthContext = yield select<Store>(s => s.authContext);
+  authContext.login();
 }
 
-function* getSignedUser(action: GetLoggedInUser) {
-  let user: UserInfo = null;
+function* getUser() {
+  const authContext: AdalAuthContext = yield select<Store>(s => s.authContext);
   try {
-    const authData = { EmailAddress: 'user@mock.com', FirstName: 'Joe' };
-    user = {
-      email: authData.EmailAddress,
-      displayName: authData.FirstName
-    };
-  } catch (error) {
-    yield logoutUser({ type: ActionNames.login.logOut, user });
-    user = null;
-  }
-
-  if (user) {
-    yield fork(refreshUserToken);
-    yield put({ type: ActionNames.login.getUserResult, user });
+    const { userName, profile }: UserResult = yield callbackToPromise<UserResult>(authContext.getUser.bind(authContext));
+    yield put(getLoggedInUserSucceeded({ displayName: `${profile.given_name} ${profile.family_name}`, email: profile.email || userName }));
+  } catch (ex) {
+    // do nothing
   }
 }
 
-function* loginUser(tokenAction: SetAccessTokenAction) {
-  const { token } = tokenAction;
-  try {
-    sessionStorage.setItem(intercomTokenName, token);
-    const { SelfToken, AuthCookie } = JSON.parse(token);
-    //ajaxHeaders.Authorization = `Bearer ${SelfToken}`;
-    //ajaxHeaders[bfAuthCookieHeaderName] = AuthCookie;
-    yield put({ type: ActionNames.login.getUser });
-    yield take(ActionNames.login.getUserResult);
-  } catch (error) {
-    sessionStorage.removeItem(intercomTokenName);
-    yield put({ type: ActionNames.login.error, error });
-  }
+function* logoutAzure() {
+  const authContext: AdalAuthContext = yield select<Store>(s => s.authContext);
+  authContext.logOut();
 }
 
-function* logoutUser(action: LogoutAction) {
-  if (isLocalhost()) {
-    sessionStorage.removeItem(intercomTokenName);
-  } else {
-    if (action.user) {
-      window.location.href = `/identity/signout?postLogoutRedirectUri=${encodeURIComponent(BASENAME)}`;
-    }
-  }
+function* watchForLogin() {
+  yield takeLatest(ActionNames.login.logIn, loginAzure);
 }
 
-function* refreshUserToken() {
-  const interval = 600000;
-  // use shorter interval below to debug
-  //const interval = 30000;
-  const { logout } = yield race({
-    timeout: call(sleep, interval),
-    logout: take(ActionNames.login.logOut)
-  });
-
-  if (!logout) {
-    // refresh our token
-    //const token = yield call(AccountClient.refreshToken);
-    yield put({ type: ActionNames.login.getUser });
-    yield take(ActionNames.login.getUserResult);
-    yield true;
-  }
-
-  yield false;
+function* watchForGetUser() {
+  yield takeLatest(ActionNames.login.getUser, getUser);
 }
 
-export function* requireUserSignedIn() {
-  const user = yield select<BaseStore>(x => x.user);
-  if (!user) {
-    try {
-      if (isLocalhost()) {
-        const token = sessionStorage.getItem(intercomTokenName);
-        if (!token) {
-          const setAccessToken = yield take(ActionNames.login.setAccessToken);
-          yield loginUser(setAccessToken);
-        } else {
-          yield loginUser({ type: ActionNames.login.setAccessToken, token });
-        }
-      } else {
-        yield put({ type: ActionNames.login.logIn });
-      }
-    } catch (error) {
-      yield put({ type: ActionNames.login.error, error });
-      yield put({ type: ActionNames.login.logOut });
-
-      return false;
-    }
-  }
-
-  return true;
+function* watchForLogout() {
+  yield takeLatest(ActionNames.login.logOut, logoutAzure);
 }
 
-function* watchLogin() {
-  yield takeLatest(ActionNames.login.logIn, checkLogin);
-}
-
-function* watchLogout() {
-  yield takeLatest(ActionNames.login.logOut, logoutUser);
-}
-
-function* watchUser() {
-  yield takeLatest(ActionNames.login.getUser, getSignedUser);
-}
-
-function* watchAccessToken() {
-  yield takeLatest(ActionNames.login.setAccessToken, loginUser);
-}
-
-export function* handleLogin() {
+function* loginHandlers() {
   yield all([
-    fork(watchLogin),
-    fork(watchLogout),
-    fork(watchAccessToken),
-    fork(watchUser)
+    fork(watchForLogin),
+    fork(watchForGetUser),
+    fork(watchForLogout),
+    fork(adalSagas)
   ]);
 }
+
+export default loginHandlers;

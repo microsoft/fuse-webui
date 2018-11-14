@@ -1,9 +1,9 @@
 import { all, fork } from 'redux-saga/effects';
-import { handleLogin } from './login';
+import login from './login';
 
 function* root() {
   yield all([
-    fork(handleLogin)
+    fork(login)
   ]);
 }
 
