@@ -18,6 +18,7 @@ export enum TopNavPanels {
 }
 
 export interface TopNavProps extends IBaseProps {
+  panels: TopNavPanels[];
   getPanelCount(panel: TopNavPanels): number;
   renderNavPanel(panel: TopNavPanels): JSX.Element;
   renderNavPanelFooter(panel: TopNavPanels): JSX.Element;
@@ -89,6 +90,10 @@ export class TopNav extends BaseComponent<TopNavProps, TopNavState> {
 
   private renderNavButton(getCount: (p: TopNavPanels) => number, panel: TopNavPanels, handler: React.MouseEventHandler<HTMLElement>): JSX.Element {
     const count = getCount(panel);
+
+    if (this.props.panels.indexOf(panel) < 0) {
+      return null;
+    }
 
     return (
       <i
