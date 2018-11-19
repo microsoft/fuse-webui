@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import App from './components/app/app';
+import App from './components/app';
 import { Store } from './store';
 //tslint:disable-next-line
 const { appName, version, aadAppId } = require('./package.json');
@@ -28,11 +28,19 @@ function getAdalRedirectUrl(): string {
   return `${curUrl.format()}adal`;
 }
 
+/* tslint:disable:no-use-before-declare */
+function handleLoginResult(errDesc: string, token: string, error: Error, tokenType: 'id_token' | 'access_token') {
+  if (token && !errDesc) {
+    store.dispatch(getLoggedInUser());
+  }
+}
+/* tslint:enable:no-use-before-declare */
+
 const authContext = ensureAuthContext({
   clientId: aadAppId,
-  //tslint:disable-next-line:no-http-string
   redirectUri: getAdalRedirectUrl(),
-  popUp: true
+  popUp: true,
+  callback: handleLoginResult as any
 });
 
 initialize({ name: appName, version });

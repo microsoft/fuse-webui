@@ -18,9 +18,19 @@ export async function readFileAsync(file: string): Promise<Buffer> {
   return callbackToPromise(fs.readFile, file);
 }
 
+export function normalizeEol(buf: Buffer): Buffer {
+  const txt = buf.toString().replace(/\r\n/g, '\n');
+
+  return new Buffer(txt);
+}
+
 export async function compareFile(src: string, target: string): Promise<boolean> {
-  const bufSrc = await readFileAsync(src);
-  const bufTarget = await readFileAsync(target);
+  const bufSrcRaw = await readFileAsync(src);
+  const bufTargetRaw = await readFileAsync(target);
+
+  // normalize eol to \n
+  const bufSrc = normalizeEol(bufSrcRaw);
+  const bufTarget = normalizeEol(bufTargetRaw);
 
   return bufSrc.compare(bufTarget) === 0;
 }

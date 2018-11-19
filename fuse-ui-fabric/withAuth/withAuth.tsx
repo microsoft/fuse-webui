@@ -30,7 +30,7 @@ export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentCla
         );
       }
     }
-    private get login(): () => void {
+    public get login(): () => void {
       return () => {
         this.props.login(this.props.history);
       };
