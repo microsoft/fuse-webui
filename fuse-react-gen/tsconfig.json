@@ -5,8 +5,13 @@
     "outDir": "./lib",
     "declaration": true,
     "target": "es6",
+    "types": [
+      "node",
+      "underscore"
+    ],
     "typeRoots": [
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "../../node_modules/@types"
     ]
   },
   "exclude": [

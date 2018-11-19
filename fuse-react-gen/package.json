@@ -4,7 +4,7 @@
   "description": "code gen tool for react.js in typescript",
   "main": "./lib/index.js",
   "bin": {
-    "swagger-ts": "./lib/index.js"
+    "react-gen": "./bin/react-gen"
   },
   "scripts": {
     "test": "jest",

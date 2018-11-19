@@ -1,8 +1,8 @@
 import { AdalContext, ensureAuthContext } from '@fuselab/ui-adal';
 import { getLoggedInUser } from '@fuselab/ui-fabric/actions/login';
 import { loadPreference } from '@fuselab/ui-fabric/themes';
-import { parseUrl } from '@fuselab/ui-shared/url';
 import { initialize } from '@fuselab/ui-shared/analytics';
+import { parseUrl } from '@fuselab/ui-shared/url';
 import { createBrowserHistory } from 'history';
 import * as React from 'react';
 import { render } from 'react-dom';
