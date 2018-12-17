@@ -10,6 +10,7 @@ export interface WithAuthActions {
 
 export interface WithAuthAttributes {
   user: UserInfo;
+  isLogin?(history: History): boolean;
 }
 
 export type WithAuthProps = WithAuthAttributes & WithAuthActions;
@@ -17,7 +18,7 @@ export type WithAuthProps = WithAuthAttributes & WithAuthActions;
 export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentClass<P & WithAuthProps>, ...roles: string[]) =>
   class WithAuth extends React.Component<P & WithAuthProps> {
     public render(): JSX.Element {
-      if (this.props.user) {
+      if (this.props.user || (this.props.isLogin && this.props.isLogin(this.props.history))) {
         return <Inner {...this.props} />;
       } else {
         return (
