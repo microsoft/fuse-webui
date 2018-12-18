@@ -1,6 +1,6 @@
 {
   "name": "@fuselab/ui-fabric",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "react components built on office ui fabric and draft-js for intercom projects",
   "main": "lib/index.js",
   "scripts": {
