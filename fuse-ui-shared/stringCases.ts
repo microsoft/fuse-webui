@@ -70,3 +70,54 @@ export function detectCase(name: string): StringCases {
 
   return result;
 }
+
+export function capitalize(word: string): string {
+  const match = word.match(/^([a-z])[a-z0-9]*$/);
+  if (!match) {
+    return word;
+  }
+
+  return `${match[1].toUpperCase()}${word.substr(1)}`;
+}
+
+export function toCase(targetCase: StringCases, text): string {
+  const source = detectCase(text);
+  let words: string[] = [];
+
+  if (source === targetCase) {
+    return text;
+  }
+
+  switch (source) {
+    case StringCases.kebabCase:
+      words = text.split('-');
+      break;
+    case StringCases.snakeCase:
+      words = text.split('_');
+      break;
+    case StringCases.camelCase:
+    case StringCases.pascalCase:
+      words = asArray(breakWords(text));
+      break;
+    default:
+      words = [text];
+  }
+
+  switch (targetCase) {
+    case StringCases.lowerCase:
+      return words.map(x => x.toLowerCase()).join('');
+    case StringCases.upperCase:
+      return words.map(x => x.toUpperCase()).join('');
+    case StringCases.camelCase:
+      return words.map((x, i) => i === 0 ? x.toLowerCase() : x).join('');
+    case StringCases.pascalCase:
+      return words.map((x, i) => i === 0 ? capitalize(x) : x).join('');
+    case StringCases.kebabCase:
+      return words.map(x => x.toLowerCase()).join('-');
+    case StringCases.snakeCase:
+      return words.map(x => x.toLowerCase()).join('_');
+    default:
+  }
+
+  return text;
+}
