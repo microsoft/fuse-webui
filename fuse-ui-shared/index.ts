@@ -13,3 +13,4 @@ export * from './analytics';
 export * from './enumHelpers';
 export * from './progressUntil';
 export * from './error';
+export * from './stringCases';
