@@ -3,6 +3,7 @@
   "appName": "{{app}}",
   "aadAppId": "12916cf1-b629-4ddf-b699-5a7d3035b38e",
   "version": "{{version}}",
+  "devServerHost": "{{host}}",
   "description": "ReactJS app for {{app}} ",
   "main": "index.ts",
   "scripts": {
