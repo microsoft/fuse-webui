@@ -1,10 +1,11 @@
 const path = require('path');
 const merge = require('webpack-merge');
-var core = require('../webpack.core');
-var devserver = require('../webpack.devserver');
+const core = require('../webpack.core');
+const devserver = require('../webpack.devserver');
 const package = require('./package.json');
 const version = `v${package.version}`;
 const appName = package.appName;
+const devServerHost = package.devServerHost;
 
 var entry = {};
 entry[appName] = './index.tsx';
@@ -16,5 +17,5 @@ module.exports = merge(core, {
     path: path.resolve('../built', version),
     publicPath: '/'
   },
-  devServer: devserver.devServer(appName, version, 'scratch.botframework.com', {{ port }}),
+  devServer: devserver.devServer(appName, version, devServerHost, {{ port }}),
 });
