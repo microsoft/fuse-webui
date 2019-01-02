@@ -2,12 +2,12 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { setAccessToken } from '../actions';
-//import { Store } from '../../models';
-import { LoginForm, LoginFormAction } from './login';
+import { BaseStore } from '../models';
+import { LoginForm, LoginFormAction, LoginFormAttributes } from './login';
 /* tslint:enable:no-use-before-declare */
 
-function mapStateToProps<Store>(state: Store): {} {
-  return {};
+function mapStateToProps<Store extends BaseStore>(state: Store): LoginFormAttributes {
+  return { loginHostName: state.loginHostName };
 }
 
 function mapDispatchToActions<Store>(dispatch: Dispatch<Store>): LoginFormAction {
