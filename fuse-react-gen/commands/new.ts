@@ -1,8 +1,10 @@
 
 import { existsSync } from 'fs';
 import { resolve } from 'path';
-import { Arguments, Argv } from 'yargs';
+import { Arguments } from 'yargs';
+import * as yargs from 'yargs/yargs';
 import { parseAgainstConfig } from '../acquire-config';
+import { transformFile, transformFolder } from '../transform';
 import { isDir } from '../utils';
 
 export const command = 'add';
@@ -12,7 +14,7 @@ export const builder = {
     alias: 's',
     required: true,
     type: 'string',
-    describe: 'source of the template file or folder',
+    describe: 'source of the template file or folder'
   },
   target: {
     alias: 't',
@@ -33,10 +35,11 @@ export async function handler(argv: ARGV & Arguments): Promise<string> {
     const configPath = resolve(source, '.react-gen-rc.json');
     if (existsSync(configPath)) {
       const config = await parseAgainstConfig(configPath, argv);
-      console.log(`creating folder with ${JSON.stringify(config)}`);
+      await transformFolder(config, source, target);
     }
   } else {
-    console.log(`generate file ${target}`);
+    const config = yargs().parse(argv._);
+    await transformFile(config, source, target);
   }
 
   return Promise.resolve(source);

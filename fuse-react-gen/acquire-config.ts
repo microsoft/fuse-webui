@@ -25,7 +25,7 @@ export async function parseAgainstConfig(
       type: 'input',
       name: key,
       message: option.describe,
-      validate: x => Promise.resolve<boolean>(option.required ? !!x : true)
+      validate: async x => Promise.resolve<boolean>(option.required ? !!x : true)
     };
   });
 
