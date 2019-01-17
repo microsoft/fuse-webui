@@ -1,6 +1,6 @@
 # General purpose code generator from template
 
-react-gen is a general purpose template based code genertor
+react-gen is a general purpose template based code generator
 
 ## Create template
 
@@ -42,5 +42,5 @@ react-gen add --source {path to template file/folder} --target {path to target s
 ### Example
 
 ```bash
-react-gen add --source ".\examples\{{app}}" --target ..\..\cortana --app cortana --port 3010 --version 1.3.0--app cortana --port 3010 --version 1.3.0 --package @intercom/cortana
+react-gen add --source ".\examples\{{app}}" --target ..\..\cortana --app cortana --port 3010 --version 1.3.0 --package @intercom/cortana
 ```
