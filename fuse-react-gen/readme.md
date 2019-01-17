@@ -36,11 +36,11 @@ export class {{Component}} extends ReactCompoent<{{Component}}Props> {
 ## Use react-gen
 
 ```bash
-react-gen --source {path to template file/folder} --target {path to target source file/folder} (--{fieldName} {filedValue})*
+react-gen add --source {path to template file/folder} --target {path to target source file/folder} (--{fieldName} {filedValue})*
 ```
 
 ### Example
 
 ```bash
-bin\react-gen --source ".\examples\{{app}}" --target ..\..\cortana --app cortana --port 3010 --version 1.3.0--app cortana --port 3010 --version 1.3.0 --package @intercom/cortana
+react-gen add --source ".\examples\{{app}}" --target ..\..\cortana --app cortana --port 3010 --version 1.3.0--app cortana --port 3010 --version 1.3.0 --package @intercom/cortana
 ```
