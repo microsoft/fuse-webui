@@ -14,6 +14,13 @@ export function ensurePath(filePath: string) {
   }
 }
 
+export async function readFileAsObj<T>(file: string): Promise<T> {
+  const buffer = await readFileAsync(file);
+  const text = buffer.toString();
+
+  return JSON.parse(text);
+}
+
 export async function readFileAsync(file: string): Promise<Buffer> {
   return callbackToPromise(fs.readFile, file);
 }

@@ -1,9 +1,12 @@
 
-import { Argv } from 'yargs';
+import { existsSync } from 'fs';
+import { resolve } from 'path';
+import { Arguments, Argv } from 'yargs';
+import { parseAgainstConfig } from '../acquire-config';
 import { isDir } from '../utils';
 
 export const command = 'add';
-export const describe = 'generate new artifacts based on templates'
+export const describe = 'generate new artifacts based on templates';
 export const builder = {
   source: {
     alias: 's',
@@ -22,13 +25,16 @@ export const builder = {
 export interface ARGV {
   source: string;
   target: string;
-  _: any;
 }
 
-export async function handler(argv: ARGV): Promise<string> {
+export async function handler(argv: ARGV & Arguments): Promise<string> {
   const { source, target } = argv;
   if (isDir(source)) {
-    console.log(`generate folder ${source}`);
+    const configPath = resolve(source, '.react-gen-rc.json');
+    if (existsSync(configPath)) {
+      const config = await parseAgainstConfig(configPath, argv);
+      console.log(`creating folder with ${JSON.stringify(config)}`);
+    }
   } else {
     console.log(`generate file ${target}`);
   }

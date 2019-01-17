@@ -2,18 +2,19 @@
   "package": {
     "alias": "n",
     "required": true,
-    "describe": "NPM module name to generated, typically with namespace structure (e.g. @intercom/app"),
+    "describe": "NPM module name to generated, typically with namespace structure (e.g. @intercom/app)",
     "type": "string"
   },
   "version": {
     "alias": "v",
     "required": true,
-    "describe": "version to be written to the generated package.json (e.g. 1.0.1"
+    "describe": "version to be written to the generated package.json (e.g. 1.0.1)",
+    "default": "0.0.1"
   },
   "app": {
     "alias": "a",
     "required": true,
-    "describe": "name of the client application (e.g. https://{hosts}/apps{appName}",
+    "describe": "name of the client application (e.g. https://{hosts}/apps{appName})",
     "type": "string"
   },
   "port": {
