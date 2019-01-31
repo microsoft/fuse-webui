@@ -1,7 +1,7 @@
 import { IStyleSet } from '@uifabric/styling/lib';
 import { IBaseProps } from '@uifabric/utilities/lib';
 import * as React from 'react';
-import { Preference } from '../themes';
+import { Preference } from '../themes/themes.types';
 export type TreeNodeType = 'leaf' | 'container';
 
 //tslint:disable:no-reserved-keywords
