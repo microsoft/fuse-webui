@@ -31,7 +31,10 @@
     "@uifabric/merge-styles": "^5.13.0",
     "@uifabric/styling": "^5.20.0",
     "@uifabric/utilities": "^5.19.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^22.1.4",
     "office-ui-fabric-react": "^6.1.2",
-    "react": "^16.3.2"
+    "react": "^16.3.2",
+    "ts-jest": "^22.0.1"
   }
 }

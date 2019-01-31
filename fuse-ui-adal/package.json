@@ -30,7 +30,8 @@
       "**/*.spec.(ts|tsx)"
     ],
     "collectCoverage": true,
-    "coverageDirectory": "./coverage"
+    "coverageDirectory": "./coverage",
+    "testURL": "http://localhost/"
   },
   "author": "hailiu@microsoft.com",
   "license": "MIT",

@@ -28,7 +28,8 @@
       "/examples/"
     ],
     "collectCoverage": true,
-    "coverageDirectory": "./coverage"
+    "coverageDirectory": "./coverage",
+    "testURL": "http://localhost/"
   },
   "dependencies": {
     "@fuselab/ui-shared": "^1.1.0",
