@@ -1,5 +1,5 @@
 import { lazy } from '@fuselab/ui-shared';
-import { BaseComponent } from '@uifabric/utilities/lib';
+import { BaseComponent, IBaseProps } from '@uifabric/utilities/lib';
 import { TextField } from 'office-ui-fabric-react/lib-commonjs/TextField';
 import * as React from 'react';
 import { EnumDropdown, EnumDropdownProps } from '../enumDropdown';
@@ -25,7 +25,7 @@ export interface TimePickerActions {
   change(ClockTime);
 }
 
-export type TimePickerProps = TimePickerAttributes & TimePickerActions;
+export type TimePickerProps = IBaseProps<TimePicker> & TimePickerAttributes & TimePickerActions;
 
 let NotationDropdown: new (props: EnumDropdownProps<TimeNotation>) => React.Component<EnumDropdownProps<TimeNotation>> = EnumDropdown;
 
