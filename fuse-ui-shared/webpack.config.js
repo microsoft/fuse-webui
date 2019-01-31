@@ -4,6 +4,7 @@ const package = require('./package.json');
 const version = `v${package.version}`;
 
 module.exports = Object.assign(core, {
+  mode: 'production',
   entry: {
     'fuse-ui-shared': './index.ts'
   },
