@@ -1,5 +1,5 @@
 import { lazy } from '@fuselab/ui-shared/decorators';
-import { BaseComponent } from '@uifabric/utilities';
+import { BaseComponent, IBaseProps } from '@uifabric/utilities';
 import { IconButton } from 'office-ui-fabric-react/lib-commonjs/Button';
 import { getTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 import * as React from 'react';
@@ -10,7 +10,7 @@ export interface NotificationActions {
   dismiss(n: Notification): void;
 }
 
-export type NotificationProps = Notification & NotificationActions & React.Props<NotificationCard>;
+export type NotificationProps = IBaseProps & Notification & NotificationActions & React.Props<NotificationCard>;
 
 const iconFromLevels = {
   [NotificationLevel.info]: 'Info',

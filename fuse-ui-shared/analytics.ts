@@ -1,4 +1,5 @@
-import { AppInsights } from 'applicationinsights-js';
+//tslint:disable-next-line
+const { AppInsights } = require('applicationinsights-js');
 
 declare global {
   interface Window {

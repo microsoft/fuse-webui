@@ -5,6 +5,7 @@ const package = require('./package.json');
 const version = `v${package.version}`;
 
 module.exports = Object.assign(core, {
+  mode: 'none',
   entry: {
     'fuse-ui-fabric': './index.ts'
   },

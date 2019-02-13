@@ -1,5 +1,5 @@
 import { lazy } from '@fuselab/ui-shared';
-import { BaseComponent } from '@uifabric/utilities/lib';
+import { BaseComponent, IBaseProps } from '@uifabric/utilities/lib';
 import { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib-commonjs/DatePicker';
 import * as React from 'react';
 import { ClockTime, getD24hour, TimePicker, TimePickerProps } from '../timePicker';
@@ -14,7 +14,7 @@ export interface DatetimePickerActions {
   change(x: Date);
 }
 
-export type DatetimePickerProps = DatetimePickerActions & DatetimePickerAttributes;
+export type DatetimePickerProps = IBaseProps<DatetimePicker> & DatetimePickerActions & DatetimePickerAttributes;
 
 /**
  * UTC date and  time picker

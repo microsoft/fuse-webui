@@ -6,5 +6,6 @@ const version = `v${package.version}`;
 const appName = package.appName;
 
 module.exports = merge(common, {
+  mode: 'development',
   plugins: devserver.plugins(appName, version)
 });
