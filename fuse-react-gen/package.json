@@ -1,6 +1,6 @@
 {
   "name": "@fuselab/react-gen",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "code gen tool for react.js in typescript",
   "main": "./lib/index.js",
   "bin": {

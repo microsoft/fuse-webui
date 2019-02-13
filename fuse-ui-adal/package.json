@@ -1,6 +1,6 @@
 {
   "name": "@fuselab/ui-adal",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "azure login ui",
   "main": "lib/index.js",
   "bin": {
