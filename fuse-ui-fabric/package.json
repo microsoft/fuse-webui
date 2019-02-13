@@ -8,6 +8,7 @@
     "build": "webpack",
     "build-node": "tsc -p tsconfig.node.json & webpack --config webpack.node.js",
     "build-all": "webpack & npm run build-node",
+    "build-prod": "npm run build-node",
     "tslint": "tslint -c tslint.json -t stylish --project tsconfig.json"
   },
   "jest": {
@@ -35,10 +36,10 @@
   "dependencies": {
     "@fuselab/ui-shared": "^1.0.0",
     "draft-js": "^0.10.5",
-    "react-dom": "16.3.2",
-    "react-redux": "5.0.6",
-    "react-router": "4.2.0",
-    "react-router-dom": "4.2.2"
+    "react-dom": "~16.3.2",
+    "react-redux": "~5.0.6",
+    "react-router": "~4.2.0",
+    "react-router-dom": "~4.2.2"
   },
   "peerDependencies": {
     "@uifabric/icons": "~5.6.0",
@@ -57,6 +58,7 @@
   },
   "devDependencies": {
     "@types/enzyme": "3.1.8",
+    "@types/react": "16.3.17",
     "@types/underscore": "^1.8.7",
     "awesome-typescript-loader": "5.2.1",
     "copy-webpack-plugin": "4.5.1",
@@ -71,7 +73,8 @@
     "tslint-microsoft-contrib": "~5.0.2",
     "tslint-react": "~3.4.0",
     "typescript": "3.2.4",
-    "uglifyjs-webpack-plugin": "^2.1.1",
+    "uglify-js": "3.4.9",
+    "uglifyjs-webpack-plugin": "2.1.1",
     "webpack": "4.29.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "3.1.14"

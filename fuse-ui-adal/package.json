@@ -10,6 +10,7 @@
     "test": "jest",
     "build": "webpack",
     "build-node": "tsc -p tsconfig.node.json & webpack --config webpack.node.js",
+    "build-prod": "npm run build-node",
     "build-all": "webpack & npm run build-node",
     "tslint": "tslint -c tslint.json -t stylish --project tsconfig.json"
   },
@@ -39,10 +40,10 @@
     "@fuselab/ui-fabric": "^1.1.0",
     "@fuselab/ui-shared": "^1.1.0",
     "adal-angular": "^1.0.17",
-    "react-dom": "16.3.2",
-    "react-redux": "5.0.6",
-    "react-router": "4.2.0",
-    "react-router-dom": "4.2.2"
+    "react-dom": "~16.3.2",
+    "react-redux": "~5.0.6",
+    "react-router": "~4.2.0",
+    "react-router-dom": "~4.2.2"
   },
   "devDependencies": {
     "@types/adal-angular": "^1.0.1",
@@ -58,7 +59,8 @@
     "tslint-microsoft-contrib": "~5.0.2",
     "tslint-react": "~3.4.0",
     "typescript": "3.2.4",
-    "uglifyjs-webpack-plugin": "^2.1.1",
+    "uglify-js": "3.4.9",
+    "uglifyjs-webpack-plugin": "2.1.1",
     "webpack": "4.29.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "3.1.14"
