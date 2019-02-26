@@ -24,8 +24,8 @@
     "url": "https://github.com/Microsoft/fuse-webui.git"
   },
   "devDependencies": {
-    "@types/react": "^16.3.17",
-    "@types/react-dom": "^16.0.6",
+    "@types/react": "16.8.5",
+    "@types/react-dom": "16.8.2",
     "@types/react-router-dom": "^4.2.3",
     "@uifabric/icons": "^5.6.0",
     "@uifabric/merge-styles": "^5.13.0",
@@ -34,7 +34,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.1.4",
     "office-ui-fabric-react": "^6.1.2",
-    "react": "^16.3.2",
+    "react": "16.8.3",
     "ts-jest": "^22.0.1"
   }
 }
