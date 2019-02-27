@@ -1,6 +1,6 @@
 {
   "name": "@fuselab/ui-adal",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "azure login ui",
   "main": "lib/index.js",
   "bin": {
@@ -40,7 +40,6 @@
     "@fuselab/ui-fabric": "^1.1.0",
     "@fuselab/ui-shared": "^1.1.0",
     "adal-angular": "^1.0.17",
-    "react-dom": "~16.3.2",
     "react-redux": "~5.0.6",
     "react-router": "~4.2.0",
     "react-router-dom": "~4.2.2"
@@ -66,8 +65,8 @@
     "webpack-dev-server": "3.1.14"
   },
   "peerDependencies": {
-    "react": "~16.3.2",
-    "react-dom": "~16.3.2",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
     "redux-saga": "~0.16.0",
     "whatwg-fetch": "^2.0.3"
   },
