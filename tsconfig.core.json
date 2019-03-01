@@ -13,6 +13,7 @@
     ],
     "declaration": false,
     "sourceMap": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "keyofStringsOnly": true
   }
 }

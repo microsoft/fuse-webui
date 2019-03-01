@@ -5,7 +5,8 @@ import { BaseComponent, IBaseProps } from '@uifabric/utilities/lib';
 import { CommandBar } from 'office-ui-fabric-react/lib-commonjs/CommandBar';
 import { IContextualMenu, IContextualMenuItem } from 'office-ui-fabric-react/lib-commonjs/ContextualMenu';
 import * as React from 'react';
-import { commandBarClassNames, Preference } from '../themes';
+import { commandBarClassNames } from '../themes/commandBar';
+import { Preference } from '../themes/themes.types';
 import { History, WithRouter } from '../withRouter';
 import classNames from './form.classNames';
 /* tslint:enable:no-use-before-declare */

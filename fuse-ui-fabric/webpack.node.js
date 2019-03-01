@@ -18,6 +18,7 @@ function replaceIconFontUrl(content, path) {
 }
 
 module.exports = Object.assign(core, {
+  mode: 'none',
   entry: {
     'empty': './empty.ts'
   },

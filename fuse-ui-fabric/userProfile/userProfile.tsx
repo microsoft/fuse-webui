@@ -1,5 +1,5 @@
-/* tslint:disable:no-use-before-declare */
 import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
+import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib-commonjs/ContextualMenu';
 import { Link } from 'office-ui-fabric-react/lib-commonjs/Link';
 import { getTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 import * as React from 'react';
@@ -7,12 +7,13 @@ import { Preference } from '../themes';
 import { History, withRouter, WithRouter } from '../withRouter';
 import classNames from './userProfile.classNames';
 import { UserInfo } from './userProfile.types';
-/* tslint:disable:no-use-before-declare */
 
 export interface UserProfileAttributes extends Preference {
   loggedIn: boolean;
   userInfo?: UserInfo;
   darkTopNav?: boolean;
+  disableThemeToggle?: boolean;
+  disableCompactToggle?: boolean;
 }
 
 export interface UserProfileActions {
@@ -27,17 +28,39 @@ const handleClick = (innerClick: Function) => ((e: React.MouseEvent<HTMLElement>
   innerClick();
 });
 
-const signedInUser = (u: UserInfo, props: UserProfileProps) => {
-  const menuProps = {
-    items: [
-      { key: 'email', name: u.email },
-      { key: 'theme', name: 'Dark theme', checked: props.theme === 'dark', canCheck: true, onClick: () => props.switchTheme(props.theme === 'dark' ? 'light' : 'dark') },
-      { key: 'compact', name: 'High density', checked: props.compact, onClick: () => props.toggleCompact(!props.compact), canCheck: true },
-      { key: 'logOut', name: 'Sign out', onClick: () => props.logOut(props.userInfo) }
-    ]
+const signedInUser = (props: UserProfileProps) => {
+  let menuItems: IContextualMenuItem[] = [
+    { key: 'email', name: props.userInfo.email }
+  ];
+  if (!props.disableThemeToggle) {
+    menuItems.push({
+      key: 'theme',
+      name: 'Dark theme',
+      checked: props.theme === 'dark',
+      canCheck: true,
+      onClick: () => props.switchTheme(props.theme === 'dark' ? 'light' : 'dark')
+    });
+  }
+  if (!props.disableThemeToggle) {
+    menuItems.push({
+      key: 'compact',
+      name: 'High density',
+      checked: props.compact,
+      canCheck: true,
+      onClick: () => props.toggleCompact(!props.compact)
+    });
+  }
+  menuItems.push({
+    key: 'logOut',
+    name: 'Sign out',
+    onClick: () => props.logOut(props.userInfo)
+  });
+  const menuProps: IContextualMenuProps = {
+    items: menuItems
   };
+  const className = props.darkTopNav ? classNames().darkThemeButton : '';
 
-  return <DefaultButton text={u.displayName} menuProps={menuProps} />;
+  return <DefaultButton text={props.userInfo.displayName} menuProps={menuProps} className={className} />;
 };
 
 export type UserProfileProps = UserProfileAttributes & UserProfileActions & WithRouter<UserProfileAttributes>;
@@ -51,6 +74,7 @@ const inner = (props: UserProfileProps) => {
     <Link
       theme={theme}
       onClick={handleClick(() => props.logIn(props.history))}
+      className={classNames().loginLink}
     >
       Sign in
     </Link>) :
@@ -58,7 +82,7 @@ const inner = (props: UserProfileProps) => {
 
   return (
     <div className={classNames().root} >
-      {!props.loggedIn ? loginLink : signedInUser(props.userInfo, props)}
+      {props.loggedIn ? signedInUser(props) : loginLink}
     </div>);
 };
 
