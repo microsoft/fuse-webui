@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
 
+export type Mappable<T> = T | { [key: string]: T };
+
 export function ensurePath(filePath: string) {
   const parts = filePath.split('/');
   let cur = '';

@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { createInterface, Interface } from 'readline';
+import { createInterface, ReadLine } from 'readline';
 
 export interface ILogger {
   warn(...args: any[]);
@@ -12,7 +12,7 @@ export interface ILogger {
  * colored logger like console
  */
 export class Logger implements ILogger {
-  private readlines: Interface;
+  private readlines: ReadLine;
   constructor() {
     this.readlines = createInterface(process.stdin, process.stdout);
   }
