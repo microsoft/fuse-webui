@@ -9,3 +9,9 @@ export interface UpdateAsyncState {
   key: string;
   asyncState: AsyncState;
 }
+
+export const updateAsyncState = (key: string, asyncState: AsyncState) => ({
+  type: Actions.updateAsyncState,
+  key,
+  asyncState
+});
