@@ -5,7 +5,7 @@ import { parseAgainstConfig } from './acquire-config';
 
 describe('acquire-config', () => {
   it('parses yargs', async () => {
-    const cli = yargs().parse('-- -a appName -p 4567');
+    const cli = '-a appName -p 4567';
     const args = await parseAgainstConfig('./examples/{{app}}/.react-gen-rc.json', cli,
       questions => Promise.resolve({
         version: '1.4.0.2',

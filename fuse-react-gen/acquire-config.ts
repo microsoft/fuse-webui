@@ -10,12 +10,11 @@ const ignoreFailure = () => {
 
 export async function parseAgainstConfig(
   configPath: string,
-  cli: Arguments,
+  cli: string,
   promptOverride?: (questions: Question[]) => Promise<Answers>): Promise<Arguments> {
   const options = await readFileAsObj<YargOptions>(configPath);
-  const args = yargs().exitProcess(false).fail(ignoreFailure).option(options).parse(cli._);
+  const args = yargs().exitProcess(false).fail(ignoreFailure).option(options).parse(cli);
   const keys = Object.keys(options);
-
   const missingKeys = keys.filter(key => !args[key]);
 
   const questions = missingKeys.map(key => {

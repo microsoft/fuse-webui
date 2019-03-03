@@ -1,5 +1,5 @@
-import { StringCases, toCase } from '@fuselab/ui-shared/stringCases';
-import { appendFileSync, createReadStream } from 'fs';
+import { StringCases, toCase } from '@fuselab/ui-shared/lib/stringCases';
+import { appendFileSync, createReadStream, readFileSync, writeFileSync } from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
 import { createInterface } from 'readline';
@@ -23,7 +23,13 @@ export function transformLines(data: Data, src: string[]): string[] {
   return src.map(line => transformLine(data, line));
 }
 
-export async function transformFileToLines(data: Data, src: string): Promise<string[]> {
+export function transformFileToLinesSync(src: string, data: Data): string[] {
+  const lines = readFileSync(src, { encoding: 'utf-8' }).split(/\n/);
+
+  return lines.map(line => transformLine(data, line));
+}
+
+export async function transformFileToLines(src: string, data: Data): Promise<string[]> {
   const lines = createInterface({
     input: createReadStream(src)
   });
@@ -43,9 +49,8 @@ export async function transformFileToLines(data: Data, src: string): Promise<str
 }
 
 export async function transformFile(data: Data, src: string, target: string): Promise<void> {
-  const lines = await transformFileToLines(data, src);
-
-  appendFileSync(target, lines.join('\n'));
+  const lines = await transformFileToLines(src, data);
+  writeFileSync(target, lines.join('\n'));
   appendFileSync(target, '\n');
 }
 
@@ -76,7 +81,7 @@ export async function transformFolder(data: Data, src: string, target: string): 
   return result;
 }
 
-export function generateTransform(src: string): Mappable<(data: Data) => Promise<string[]>> {
+export function generateMappable<T>(src: string, generate: (x: string) => T): Mappable<T> {
   if (isDir(src)) {
     return glob.sync(`${src}/**/*`)
       .map(filename => path.resolve(filename))
@@ -84,15 +89,23 @@ export function generateTransform(src: string): Mappable<(data: Data) => Promise
         (tx, curPath) => {
           const fileName = path.basename(curPath, path.extname(curPath));
           const key = toCase(StringCases.camelCase, fileName);
-          tx[key] = generateTransform(curPath);
+
+          tx[key] = generateMappable(curPath, generate);
 
           return tx;
         },
         {});
   }
 
-  //tslint:disable-next-line:promise-function-async
-  return data => transformFileToLines(data, src);
+  return generate(src);
+}
+
+export function generateTransformSync(src: string): Mappable<(data: Data) => string[]> {
+  return generateMappable(src, x => transformFileToLinesSync.bind(null, x));
+}
+
+export function generateTransform(src: string): Mappable<(data: Data) => Promise<string[]>> {
+  return generateMappable(src, x => transformFileToLines.bind(null, x));
 }
 
 export function init() {

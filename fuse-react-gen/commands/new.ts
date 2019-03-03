@@ -1,4 +1,4 @@
-
+import { capitalize } from '@fuselab/ui-shared/lib/stringCases';
 import { existsSync } from 'fs';
 import * as glob from 'glob';
 import { resolve } from 'path';
@@ -6,7 +6,7 @@ import { Arguments } from 'yargs';
 import * as yargs from 'yargs/yargs';
 import { parseAgainstConfig } from '../acquire-config';
 import logger from '../logger';
-import { transformFile, transformFolder } from '../transform';
+import { generateTransformSync, init, transformFile, transformFolder } from '../transform';
 import { ensurePath, isDir } from '../utils';
 
 export const command = 'add';
@@ -34,12 +34,20 @@ export interface ARGV {
 export async function handler(argv: ARGV & Arguments): Promise<string> {
   const { source, target } = argv;
   if (isDir(source)) {
-    ensurePath(target);
     const configPath = resolve(source, '.react-gen-rc.json');
     if (existsSync(configPath)) {
-      const config = await parseAgainstConfig(configPath, argv);
-      await transformFolder(config, source, target);
+      const config = await parseAgainstConfig(configPath, process.argv.join(' '));
+      const genTarget = config._react_gen_target;
+      if (genTarget) {
+        const transforms = generateTransformSync(source);
+        const data = <any>{ capitalize, ...transforms, ...config };
+        await transformFile(data, resolve(source, genTarget), target);
+      } else {
+        ensurePath(target);
+        await transformFolder(config, source, target);
+      }
     } else {
+      ensurePath(target);
       await transformFolder(yargs().parse(argv._), source, target);
     }
     glob.sync(`${target}/**/*.*`, { ignore: `${target}/node_modules/**/*` }).map(x => {
@@ -53,3 +61,5 @@ export async function handler(argv: ARGV & Arguments): Promise<string> {
 
   return Promise.resolve(source);
 }
+
+init();

@@ -1,9 +1,9 @@
-import { {{ model }} } from '../models';
+import { {{capitalize(model)}} } from '../models';
 
 export enum ActionNames {
-  {{ verbs.map(verb => `  ${verb}: "{{namespace-prefix}}.${verb}"`).join(',\\n') }}
+{{actions.map(verb => `  ${verb} = "${namespace}.${verb}"`).join(',\n')}}
 }
 
-{{ verbs.map(verb => actionInterface({verb, model})).join('') }}
+{{actions.map(verb => actionInterface({verb, model, capitalize}).join('\n')).join('\n')}}
 
-{{ verbs.map(verb => actionGenerator({verb, model})).join('') }}
+{{actions.map(verb => actionGenerator({verb, model, capitalize}).join('\n')).join('\n')}}
