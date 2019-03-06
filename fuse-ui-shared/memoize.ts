@@ -22,16 +22,17 @@ function traverseSet<T>(ctx: Traversable<T>, val: any, ...args: string[]) {
     parent[last] = val;
 }
 
+const endMarker = Symbol('memoize-end-marker');
 export function memoize<T>(memory: Traversable<T>, func: (...args: ValueArg[]) => T) : (...args: ValueArg[]) => T {
     const marker = Symbol();
 
     return (...args: ValueArg[]) => {
-        const prev: T = traverseGet.call(null, memory, marker, ...args);
+        const prev: T = traverseGet.call(null, memory, marker, ...args, endMarker);
         if (prev !== undefined) {
             return prev;
         }
         const result: T = func.call(null, ...args);
-        traverseSet.call(null, memory, result, marker, ...args);
+        traverseSet.call(null, memory, result, marker, ...args, endMarker);
 
         return result;
     };
