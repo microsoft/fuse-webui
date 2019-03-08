@@ -80,6 +80,7 @@ export function capitalize(word: string): string {
   return `${match[1].toUpperCase()}${word.substr(1)}`;
 }
 
+
 export function toCase(targetCase: StringCases, text): string {
   const source = detectCase(text);
   let words: string[] = [];
@@ -109,9 +110,9 @@ export function toCase(targetCase: StringCases, text): string {
     case StringCases.upperCase:
       return words.map(x => x.toUpperCase()).join('');
     case StringCases.camelCase:
-      return words.map((x, i) => i === 0 ? x.toLowerCase() : x).join('');
+      return words.map((x, i) => i === 0 ? x.toLowerCase() : capitalize(x)).join('');
     case StringCases.pascalCase:
-      return words.map((x, i) => i === 0 ? capitalize(x) : x).join('');
+      return words.map((x, i) => i === 0 ? capitalize(x) : capitalize(x)).join('');
     case StringCases.kebabCase:
       return words.map(x => x.toLowerCase()).join('-');
     case StringCases.snakeCase:
@@ -121,3 +122,9 @@ export function toCase(targetCase: StringCases, text): string {
 
   return text;
 }
+
+export const camelCase = (word: string) => toCase(StringCases.camelCase, word);
+
+export const pascalCase = (word: string) => toCase(StringCases.pascalCase, word);
+
+export const kebabCase = (word: string) => toCase(StringCases.kebabCase, word);

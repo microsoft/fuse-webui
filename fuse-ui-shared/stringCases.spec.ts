@@ -1,6 +1,6 @@
 ///<reference types='jasmine'/>
 import { asArray } from './iterator';
-import { breakWords, capitalize, detectCase, StringCases, toCase } from './stringCases'
+import { breakWords, camelCase, capitalize, detectCase, kebabCase, pascalCase, StringCases, toCase } from './stringCases'
 
 const detectCases: [string, StringCases][] = [
   ['hello', StringCases.lowerCase],
@@ -18,6 +18,20 @@ const transformCases: [string, StringCases, string][] = [
   ['HelloWorld', StringCases.camelCase, 'helloWorld'],
   ['helloWorld', StringCases.snakeCase, 'hello_world']
 ];
+
+const camelCaseTests = {
+  'hello': 'hello',
+  'Hello': 'hello',
+  'HelloWorld': 'helloWorld',
+  'hello-world': 'helloWorld'
+};
+
+const pascalCaseTests = {
+  'hello': 'Hello',
+  'Hello': 'Hello',
+  'HelloWorld': 'HelloWorld',
+  'hello-world': 'HelloWorld'
+};
 
 describe('stringCases', () => {
   it('breaks words', () => {
@@ -39,5 +53,13 @@ describe('stringCases', () => {
     transformCases.forEach(x => {
       expect(toCase(x[1], x[0])).toBe(x[2]);
     });
+  });
+
+  it('camelCase', () => {
+    Object.keys(camelCaseTests).forEach(x => expect(camelCase(x)).toBe(camelCaseTests[x]));
+  });
+
+  it('pascalCase', () => {
+    Object.keys(pascalCaseTests).forEach(x => expect(pascalCase(x)).toBe(pascalCaseTests[x]));
   })
 });
