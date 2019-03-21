@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
 
+export type Mappable<T> = T | { [key: string]: T };
+
 export function ensurePath(filePath: string) {
   const parts = filePath.split('/');
   let cur = '';
@@ -12,6 +14,13 @@ export function ensurePath(filePath: string) {
       fs.mkdirSync(cur);
     }
   }
+}
+
+export async function readFileAsObj<T>(file: string): Promise<T> {
+  const buffer = await readFileAsync(file);
+  const text = buffer.toString();
+
+  return JSON.parse(text);
 }
 
 export async function readFileAsync(file: string): Promise<Buffer> {

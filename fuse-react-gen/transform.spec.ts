@@ -1,9 +1,9 @@
 ///<reference types='jasmine'/>
-import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
-import * as fs from 'fs';
+import { callbackToPromise } from '@fuselab/ui-shared/lib/asyncUtils';
+import { capitalize } from '@fuselab/ui-shared/lib/stringCases';
 import * as path from 'path';
 import * as rimraf from 'rimraf';
-import { Data, init, transformFile, transformFolder, transformLine } from './transform';
+import { Data, generateTransform, init, transformFile, transformFileToLinesSync, transformFolder, transformLine } from './transform';
 import { compareFile, compareFolder, ensurePath } from './utils';
 init();
 
@@ -16,6 +16,7 @@ describe('transformLine', () => {
 
     expect(transformLine(data, 'export interface {{Component}}Attributes {')).toBe('export interface MenuAttributes {');
   });
+
 });
 
 describe('transformFile', () => {
@@ -38,6 +39,22 @@ describe('transformFile', () => {
       await callbackToPromise(rimraf, target);
     }
   });
+
+  it('transformFileToLinesSync', () => {
+    const data: Data = {
+      Component: 'Nav',
+      component: 'nav'
+    };
+
+    const src = './examples/nav.tsx';
+    const target = './examples/results/nav.tsx';
+    const snapshot = './examples/snapshots/nav.tsx';
+
+    ensurePath(path.resolve(target, '..'));
+
+    const lines = transformFileToLinesSync(src, data);
+    expect(lines.length).toBeGreaterThan(0);
+  })
 });
 
 describe('transformFolder', () => {
@@ -60,4 +77,23 @@ describe('transformFolder', () => {
       rimraf.sync('./examples/results/components/**/*.*');
     }
   })
+})
+
+describe('generateTransform', () => {
+  it('generateFileTransform', async () => {
+    const t = generateTransform('./examples/actions/actionInterface.ts');
+    expect(t).not.toBeNull();
+    expect(typeof (t)).toBe('function');
+    if (typeof t === 'function') {
+      const lines = await t({ verb: 'add', model: 'todo', capitalize });
+      expect(lines).toEqual(['export interface AddTodo {', '  type: ActionNames.add;', '  entity: Todo;', '}']);
+    }
+  });
+
+  it('generateFolderTransforms', () => {
+    const t = generateTransform('./examples/actions');
+    expect(t).not.toBeNull();
+    expect(typeof (t)).toBe('object');
+    expect(Object.keys(t).sort()).toEqual(['actionGenerator', 'actionInterface', '{{model}}']);
+  });
 })

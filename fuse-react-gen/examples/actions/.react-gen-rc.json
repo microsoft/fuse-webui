@@ -1,0 +1,26 @@
+{
+  "namespace": {
+    "alias": "n",
+    "required": true,
+    "describe": "namespace prefix",
+    "type": "string"
+  },
+  "actions": {
+    "alias": "a",
+    "required": true,
+    "describe": "set of verbs to create actions for (separate by ',')",
+    "type": "array"
+  },
+  "model": {
+    "alias": "m",
+    "required": true,
+    "describe": "name of the model as object/entity of the action",
+    "type": "string"
+  },
+  "_react_gen_target": {
+    "alias": "gt",
+    "required": false,
+    "describe": "target output type 'file' or 'folder'",
+    "default": "{{model}}.ts"
+  }
+}

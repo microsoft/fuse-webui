@@ -1,0 +1,25 @@
+{
+  "component": {
+    "alias": "c",
+    "required": true,
+    "describe": "component name",
+    "type": "string"
+  },
+  "Component": {
+    "alias": "C",
+    "required": false,
+    "describe": "Pascal-cased class name",
+    "type": "string",
+    "default": "{{pascalCase(component)}}"
+  },
+  "_react_gen_target": {
+    "alias": "gt",
+    "required": false,
+    "describe": "target output type 'file' or 'folder'",
+    "default": [
+      "{{component}}.tsx",
+      "index.ts",
+      "{{component}}.classNames.ts"
+    ]
+  }
+}

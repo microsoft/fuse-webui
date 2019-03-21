@@ -14,7 +14,7 @@ import createSagaMiddleware from 'redux-saga';
 import App from './components/app';
 import { Store } from './store';
 //tslint:disable-next-line
-const { appName, version, aadAppId } = require('./package.json');
+const { aadAppId, appName, devServerHost, version } = require('./package.json');
 import reducers from './reducers';
 import rootSaga from './sagas';
 /* tslint:enable:no-use-before-declare */
@@ -51,7 +51,8 @@ const store: any = createStore<Store>(
   {
     authContext,
     user: null,
-    preference: loadPreference()
+    preference: loadPreference(),
+    loginHostName: devServerHost
   },
   applyMiddleware(sagaMiddleware)
 );

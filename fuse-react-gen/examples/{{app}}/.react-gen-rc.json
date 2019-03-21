@@ -1,0 +1,32 @@
+{
+  "package": {
+    "alias": "n",
+    "required": true,
+    "describe": "NPM module name to generated, typically with namespace structure (e.g. @intercom/app)",
+    "type": "string"
+  },
+  "version": {
+    "alias": "v",
+    "required": true,
+    "describe": "version to be written to the generated package.json (e.g. 1.0.1)",
+    "default": "0.0.1"
+  },
+  "host": {
+    "alias": "h",
+    "required": true,
+    "describe": "hostname of RES api to build against",
+    "type": "string"
+  },
+  "app": {
+    "alias": "a",
+    "required": true,
+    "describe": "name of the client application (e.g. https://{host}/apps{appName})",
+    "type": "string"
+  },
+  "port": {
+    "alias": "p",
+    "required": true,
+    "describe": "port number used to host the app in webpack-dev-server for local development (e.g. 3007)",
+    "type": "number"
+  }
+}

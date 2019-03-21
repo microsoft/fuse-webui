@@ -75,48 +75,38 @@ export interface QueryResult<T, TN> extends BaseEntity<TN> {
 
 export type EntityAction<T, TN> = QueryEntities<TN> | QueryResult<T, TN> | FetchEntity<TN> | FetchResult<T, TN>;
 
-export function beginQuery<TN>(target: TN, query: string, asyncKey: string, skip?: number, take?: number): QueryEntities<TN> {
-  return {
-    type: EntityActions.query,
-    target,
-    query,
-    asyncKey,
-    skip,
-    take
-  };
-}
+export const beginQuery = <TN>(target: TN, query: string, asyncKey: string, skip?: number, take?: number): QueryEntities<TN> => ({
+  type: EntityActions.query,
+  target,
+  query,
+  asyncKey,
+  skip,
+  take
+});
 
-export function beginUpdate<T, TN>(target: TN, entity: T, asyncKey: string): UpdateEntity<T, TN> {
-  return {
-    type: EntityActions.update,
-    target,
-    entity,
-    asyncKey
-  };
-}
+export const beginUpdate = <T, TN>(target: TN, entity: T, asyncKey: string): UpdateEntity<T, TN> => ({
+  type: EntityActions.update,
+  target,
+  entity,
+  asyncKey
+});
 
-export function beginDelete<T, TN>(target: TN, entity: T, asyncKey: string): DeleteEntity<T, TN> {
-  return {
-    type: EntityActions.delete,
-    target,
-    entity,
-    asyncKey
-  };
-}
+export const beginDelete = <T, TN>(target: TN, entity: T, asyncKey: string): DeleteEntity<T, TN> => ({
+  type: EntityActions.delete,
+  target,
+  entity,
+  asyncKey
+});
 
-export function queryResult<T, TN>(target: TN, items: T[]): QueryResult<T, TN> {
-  return {
-    type: EntityActions.queried,
-    items,
-    target,
-    hasMore: items && items.length > 0
-  };
-}
+export const queryResult = <T, TN>(target: TN, items: T[]): QueryResult<T, TN> => ({
+  type: EntityActions.queried,
+  items,
+  target,
+  hasMore: items && items.length > 0
+});
 
-export function beginInsert<T, TN>(target: TN, entity: T): BeginInsert<T, TN> {
-  return {
-    type: EntityActions.beginInsert,
-    target,
-    entity
-  };
-}
+export const beginInsert = <T, TN>(target: TN, entity: T): BeginInsert<T, TN> => ({
+  type: EntityActions.beginInsert,
+  target,
+  entity
+});

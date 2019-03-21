@@ -14,3 +14,4 @@ export * from './enumHelpers';
 export * from './progressUntil';
 export * from './error';
 export * from './stringCases';
+export * from './memoize';

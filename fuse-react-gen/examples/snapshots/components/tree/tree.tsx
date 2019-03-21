@@ -3,11 +3,11 @@ import * as React from 'react';
 import classNames from './tree.classNames';
 
 export interface TreeAttributes {
-  id: string;
+  //id: string;
 }
 
 export interface TreeActions {
-  save();
+  //save();
 }
 
 export type TreeProps = TreeAttributes & TreeActions;
