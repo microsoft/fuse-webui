@@ -80,7 +80,6 @@ export function capitalize(word: string): string {
   return `${match[1].toUpperCase()}${word.substr(1)}`;
 }
 
-
 export function toCase(targetCase: StringCases, text): string {
   const source = detectCase(text);
   let words: string[] = [];

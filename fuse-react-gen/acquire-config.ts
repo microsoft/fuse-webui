@@ -3,7 +3,6 @@ import { Answers, prompt, Question } from 'inquirer';
 import * as _ from 'underscore';
 import { Arguments, Options } from 'yargs';
 import * as yargs from 'yargs/yargs';
-import logger from './logger';
 import { readFileAsObj } from './utils';
 export type YargOptions = { [option: string]: Options };
 
