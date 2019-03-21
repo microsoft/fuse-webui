@@ -11,10 +11,16 @@
     "describe": "version to be written to the generated package.json (e.g. 1.0.1)",
     "default": "0.0.1"
   },
+  "host": {
+    "alias": "h",
+    "required": true,
+    "describe": "hostname of RES api to build against",
+    "type": "string"
+  },
   "app": {
     "alias": "a",
     "required": true,
-    "describe": "name of the client application (e.g. https://{hosts}/apps{appName})",
+    "describe": "name of the client application (e.g. https://{host}/apps{appName})",
     "type": "string"
   },
   "port": {

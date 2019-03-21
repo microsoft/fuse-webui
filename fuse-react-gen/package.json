@@ -4,7 +4,7 @@
   "description": "code gen tool for react.js in typescript",
   "main": "./lib/cli.js",
   "bin": {
-    "react-gen": "./bin/react-gen"
+    "react-gen": "./lib/cli.js"
   },
   "scripts": {
     "test": "jest",

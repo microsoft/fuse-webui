@@ -1,65 +1,51 @@
-import { capitalize } from '@fuselab/ui-shared/lib/stringCases';
-import { existsSync } from 'fs';
-import * as glob from 'glob';
 import { resolve } from 'path';
 import { Arguments } from 'yargs';
-import * as yargs from 'yargs/yargs';
-import { parseAgainstConfig } from '../acquire-config';
 import logger from '../logger';
-import { generateTransformSync, init, transformFile, transformFolder } from '../transform';
-import { ensurePath, isDir } from '../utils';
+import { handler as addHandler } from './add';
 
-export const command = 'add';
-export const describe = 'generate new artifacts based on templates';
+export const command = 'new';
+export const describe = 'simplified creation focused on react-redux-fabric app';
 export const builder = {
-  source: {
-    alias: 's',
+  kind: {
+    alias: 'k',
     required: true,
     type: 'string',
-    describe: 'source of the template file or folder'
+    describe: 'type to create: [\'app\' | \'action\' | \'component\']'
   },
-  target: {
-    alias: 't',
-    required: true,
+  appName: {
+    alias: 'a',
+    required: false,
     type: 'string',
-    describe: 'target path of the artifact to be generated'
+    describe: 'name of the app or action to be created'
   }
 };
 
+export type CodeKind = 'app' | 'action' | 'component';
+
 export interface ARGV {
-  source: string;
-  target: string;
+  kind: CodeKind;
+  appName: string;
 }
 
 export async function handler(argv: ARGV & Arguments): Promise<string> {
-  const { source, target } = argv;
-  if (isDir(source)) {
-    const configPath = resolve(source, '.react-gen-rc.json');
-    if (existsSync(configPath)) {
-      const config = await parseAgainstConfig(configPath, process.argv.join(' '));
-      const genTarget = config._react_gen_target;
-      if (genTarget) {
-        const transforms = generateTransformSync(source);
-        const data = <any>{ capitalize, ...transforms, ...config };
-        await transformFile(data, resolve(source, genTarget), target);
-      } else {
-        ensurePath(target);
-        await transformFolder(config, source, target);
-      }
-    } else {
-      ensurePath(target);
-      await transformFolder(yargs().parse(argv._), source, target);
+  const { kind, appName } = argv;
+  const addSource = {
+    app: {
+      source: 'examples/{{app}}'
+    },
+    action: {
+      source: 'examples/actions'
+    },
+    component: {
+      source: 'examples/{{compoennt}}'
     }
-    glob.sync(`${target}/**/*.*`, { ignore: `${target}/node_modules/**/*` }).map(x => {
-      logger.info(`${x} created`);
-    });
-  } else {
-    const config = yargs().parse(argv._);
-    await transformFile(config, source, target);
-    logger.info(`${target} created`);
-  }
+  };
 
-  return Promise.resolve(source);
+  const source = resolve(argv.$0, `../../${addSource[kind].source}`);
+  const target = resolve('.', appName);
+  const addArgv = { source, target, $0: argv.$0, _: [] };
+
+  logger.info(`calling add with argv = ${JSON.stringify(addArgv, null, 2)}`);
+
+  return addHandler(addArgv);
 }
-
-init();

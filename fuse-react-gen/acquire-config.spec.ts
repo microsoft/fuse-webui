@@ -19,7 +19,8 @@ describe('acquire-config', () => {
     expect(args.questions).not.toBe(null);
 
     const questions: Question[] = args.questions;
-    expect(questions.length).toBe(1);
+    expect(questions.length).toBe(2);
     expect(questions[0].name).toBe('package');
+    expect(questions[1].name).toBe('host');
   })
 })
