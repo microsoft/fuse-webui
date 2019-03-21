@@ -2,6 +2,7 @@ import { capitalize } from '@fuselab/ui-shared/lib/stringCases';
 import { existsSync } from 'fs';
 import * as glob from 'glob';
 import { resolve } from 'path';
+import * as _ from 'underscore';
 import { Arguments } from 'yargs';
 import * as yargs from 'yargs/yargs';
 import { parseAgainstConfig } from '../acquire-config';
@@ -31,17 +32,19 @@ export interface ARGV {
   target: string;
 }
 
-export async function handler(argv: ARGV & Arguments): Promise<string> {
+export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise<string> {
   const { source, target } = argv;
   if (isDir(source)) {
     const configPath = resolve(source, '.react-gen-rc.json');
     if (existsSync(configPath)) {
-      const config = await parseAgainstConfig(configPath, process.argv.join(' '));
+      const config = await parseAgainstConfig(configPath, (extra || process.argv).join(' '));
       const genTarget = config._react_gen_target;
       if (genTarget) {
         const transforms = generateTransformSync(source);
         const data = <any>{ capitalize, ...transforms, ...config };
-        await transformFile(data, resolve(source, genTarget), target);
+        logger.info(`data = ${JSON.stringify(data, null, 2)}`);
+        const fileTarget = isDir(target) ? resolve(target, _.template(genTarget)(data)) : target;
+        await transformFile(data, resolve(source, genTarget), fileTarget);
       } else {
         ensurePath(target);
         await transformFolder(config, source, target);

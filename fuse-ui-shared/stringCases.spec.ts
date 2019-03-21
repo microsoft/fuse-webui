@@ -41,6 +41,7 @@ describe('stringCases', () => {
   it('capitalize word', () => {
     expect(capitalize('hello')).toBe('Hello');
     expect(capitalize('Hello')).toBe('Hello');
+    expect(capitalize('helloWorld')).toBe('HelloWorld');
   });
 
   it('detect cases', () => {

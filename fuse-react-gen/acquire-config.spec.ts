@@ -22,5 +22,16 @@ describe('acquire-config', () => {
     expect(questions.length).toBe(2);
     expect(questions[0].name).toBe('package');
     expect(questions[1].name).toBe('host');
-  })
+  });
+
+  it('parses array', async () => {
+    const cli = '-n mockApp -m mock';
+    const args = await parseAgainstConfig('./examples/actions/.react-gen-rc.json', cli,
+      questions => Promise.resolve({
+        actions: 'approve, reject, start',
+        questions
+      }));
+
+    expect(args.actions).toEqual(['approve', 'reject', 'start']);
+  });
 })

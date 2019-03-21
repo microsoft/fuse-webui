@@ -1,12 +1,17 @@
 import { Answers, prompt, Question } from 'inquirer';
 import { Arguments, Options } from 'yargs';
 import * as yargs from 'yargs/yargs';
+import logger from './logger';
 import { readFileAsObj } from './utils';
 export type YargOptions = { [option: string]: Options };
 
 const ignoreFailure = () => {
   // do nothing
 };
+
+function asList(text: string): string[] {
+  return text.split(',').map(x => x.trim());
+}
 
 export async function parseAgainstConfig(
   configPath: string,
@@ -28,7 +33,21 @@ export async function parseAgainstConfig(
     };
   });
 
-  const answers = promptOverride ? await promptOverride(questions) : await prompt(questions);
+  const answers: any = promptOverride ? await promptOverride(questions) : await prompt(questions);
+  const answerKeys = Object.keys(answers);
 
-  return { ...args, ...answers };
+  const typedAnswers = answerKeys.reduce(
+    (cur, key) => {
+      const val = answers[key];
+      const option = options[key];
+
+      return {
+        ...cur,
+        //key: options[key].type === 'array' ? val.split(',').map(x => x.trim()) : val
+        [key]: option && option.type === 'array' ? asList(val) : val
+      };
+    },
+    {});
+
+  return { ...args, ...typedAnswers };
 }

@@ -72,7 +72,7 @@ export function detectCase(name: string): StringCases {
 }
 
 export function capitalize(word: string): string {
-  const match = word.match(/^([a-z])[a-z0-9]*$/);
+  const match = word.match(/^([a-z])[a-z0-9A-Z]*$/);
   if (!match) {
     return word;
   }

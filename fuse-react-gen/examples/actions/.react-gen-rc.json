@@ -8,7 +8,7 @@
   "actions": {
     "alias": "a",
     "required": true,
-    "describe": "set of verbs to create actions for",
+    "describe": "set of verbs to create actions for (separate by ',')",
     "type": "array"
   },
   "model": {

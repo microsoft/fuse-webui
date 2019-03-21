@@ -12,11 +12,11 @@ export const builder = {
     type: 'string',
     describe: 'type to create: [\'app\' | \'action\' | \'component\']'
   },
-  appName: {
+  dest: {
     alias: 'a',
     required: false,
     type: 'string',
-    describe: 'name of the app or action to be created'
+    describe: 'name of the kind of object to be created'
   }
 };
 
@@ -28,7 +28,7 @@ export interface ARGV {
 }
 
 export async function handler(argv: ARGV & Arguments): Promise<string> {
-  const { kind, appName } = argv;
+  const { kind, dest } = argv;
   const addSource = {
     app: {
       source: 'examples/{{app}}'
@@ -42,10 +42,10 @@ export async function handler(argv: ARGV & Arguments): Promise<string> {
   };
 
   const source = resolve(argv.$0, `../../${addSource[kind].source}`);
-  const target = resolve('.', appName);
+  const target = resolve('.', dest);
   const addArgv = { source, target, $0: argv.$0, _: [] };
 
   logger.info(`calling add with argv = ${JSON.stringify(addArgv, null, 2)}`);
 
-  return addHandler(addArgv);
+  return addHandler(addArgv, []);
 }

@@ -1,6 +1,6 @@
 ///<reference types='jasmine'/>
-import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
-import { capitalize } from '@fuselab/ui-shared/stringCases';
+import { callbackToPromise } from '@fuselab/ui-shared/lib/asyncUtils';
+import { capitalize } from '@fuselab/ui-shared/lib/stringCases';
 import * as path from 'path';
 import * as rimraf from 'rimraf';
 import { Data, generateTransform, init, transformFile, transformFileToLinesSync, transformFolder, transformLine } from './transform';
