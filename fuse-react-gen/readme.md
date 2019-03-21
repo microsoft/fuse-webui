@@ -1,6 +1,47 @@
 # General purpose code generator from template
 
-react-gen is a general purpose template based code generator
+fuse-gen is a general purpose template based code generator
+
+## Get started
+
+```bash
+npm install -g @fuselab/react-gen
+```
+
+## Basic usage
+
+The <kbd>new</kbd> sub command has built-in templates to support common usage scenarios of bootstrapping React-redux app.
+
+### Create starter React-redux-uifabric app
+
+```bash
+fuse-gen new -k app -a [appName]
+# answer prompts about the configuration of the your app
+```
+
+### Create new redux component
+
+```bash
+cd {appRoot}\components
+fuse-gen new -k component -a .
+# specify the name of your component
+```
+
+### create new redux action
+
+```bash
+cd {appRoot}\actions
+fuse-gen new -k action -a .
+# answer prompts about the actions to be created
+```
+
+## Advanced usage
+
+The <kbd>add</kbd> sub command allows you use custom templates to
+
+```bash
+fuse-gen add --source [file|folder] --target [file|folder]
+```
 
 ## Create template
 
@@ -31,16 +72,4 @@ export type {{Component}}Props = {{Component}}Attributes & {{Component}}Actions;
 
 export class {{Component}} extends ReactCompoent<{{Component}}Props> {
 }
-```
-
-## Use react-gen
-
-```bash
-react-gen add --source {path to template file/folder} --target {path to target source file/folder} (--{fieldName} {filedValue})*
-```
-
-### Example
-
-```bash
-react-gen add --source ".\examples\{{app}}" --target ..\..\cortana --app cortana --port 3010 --version 1.3.0 --package @intercom/cortana
 ```
