@@ -1,4 +1,6 @@
+import * as stringCases from '@fuselab/ui-shared/lib/stringCases';
 import { Answers, prompt, Question } from 'inquirer';
+import * as _ from 'underscore';
 import { Arguments, Options } from 'yargs';
 import * as yargs from 'yargs/yargs';
 import logger from './logger';
@@ -49,5 +51,15 @@ export async function parseAgainstConfig(
     },
     {});
 
-  return { ...args, ...typedAnswers };
+  const argKeys = Object.keys(args);
+  const transformedArgs: any = argKeys.reduce(
+    (cur, key) => {
+      const val = args[key];
+      const transformedVal = typeof val === 'string' ? _.template(val)({ ...args, ...answers, ...stringCases }) : val;
+
+      return { ...cur, [key]: transformedVal };
+    },
+    {});
+
+  return { ...transformedArgs, ...typedAnswers };
 }

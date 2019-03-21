@@ -1,7 +1,7 @@
 import { capitalize } from '@fuselab/ui-shared/lib/stringCases';
 import { existsSync } from 'fs';
 import * as glob from 'glob';
-import { resolve } from 'path';
+import { basename, resolve } from 'path';
 import * as _ from 'underscore';
 import { Arguments } from 'yargs';
 import * as yargs from 'yargs/yargs';
@@ -34,6 +34,7 @@ export interface ARGV {
 
 export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise<string> {
   const { source, target } = argv;
+  let realTarget = target;
   if (isDir(source)) {
     const configPath = resolve(source, '.react-gen-rc.json');
     if (existsSync(configPath)) {
@@ -43,19 +44,31 @@ export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise
         const transforms = generateTransformSync(source);
         const data = <any>{ capitalize, ...transforms, ...config };
         logger.info(`data = ${JSON.stringify(data, null, 2)}`);
-        const fileTarget = isDir(target) ? resolve(target, _.template(genTarget)(data)) : target;
-        await transformFile(data, resolve(source, genTarget), fileTarget);
+        const isFolder = Array.isArray(genTarget) && genTarget.length > 1;
+        const transformedSource = _.template(source)(data);
+        realTarget = transformedSource !== source ? resolve(target, basename(transformedSource)) : target;
+        const targetFiles = isFolder ?
+          genTarget.reduce((cur, x) => ({ ...cur, [x]: resolve(realTarget, _.template(x)(data)) }), {}) :
+          {
+            [genTarget]: isDir(target) ? resolve(realTarget, _.template(genTarget)(data)) : realTarget
+          };
+
+        ensurePath(realTarget);
+        for (const gen of genTarget) {
+          await transformFile(data, resolve(source, gen), targetFiles[gen]);
+        }
       } else {
-        ensurePath(target);
-        await transformFolder(config, source, target);
+        ensurePath(realTarget);
+        await transformFolder(yargs().parse(argv._), source, realTarget);
       }
+      glob.sync(`${realTarget}/**/*.*`, { ignore: `${target}/node_modules/**/*` }).map(x => {
+        logger.info(`${x} created`);
+      });
     } else {
-      ensurePath(target);
-      await transformFolder(yargs().parse(argv._), source, target);
+      const config = yargs().parse(argv._);
+      await transformFile(config, source, target);
+      logger.info(`${target} created`);
     }
-    glob.sync(`${target}/**/*.*`, { ignore: `${target}/node_modules/**/*` }).map(x => {
-      logger.info(`${x} created`);
-    });
   } else {
     const config = yargs().parse(argv._);
     await transformFile(config, source, target);

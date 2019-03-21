@@ -37,7 +37,7 @@ export async function handler(argv: ARGV & Arguments): Promise<string> {
       source: 'examples/actions'
     },
     component: {
-      source: 'examples/{{compoennt}}'
+      source: 'examples/{{component}}'
     }
   };
 

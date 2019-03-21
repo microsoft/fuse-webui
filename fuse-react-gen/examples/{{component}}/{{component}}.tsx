@@ -3,11 +3,11 @@ import * as React from 'react';
 import classNames from './{{component}}.classNames';
 
 export interface {{Component}}Attributes {
-  id: string;
+  //id: string;
 }
 
 export interface {{Component}}Actions {
-  save();
+  //save();
 }
 
 export type {{Component}}Props = {{Component}}Attributes & {{Component}}Actions;
