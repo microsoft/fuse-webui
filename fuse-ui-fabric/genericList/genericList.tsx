@@ -13,12 +13,12 @@ export interface ListAttributes<T> {
 }
 
 export interface ListActions<T> {
-  list(asyncKey: string);
-  beginInsert(asyncKey: string);
-  commit(asyncKey: string, item: T);
-  delete(asyncKey: string, item: T);
-  discardEdit(asyncKey: string, item: T);
-  filterBy(asyncKey: string, key: keyof T, val: any);
+  list(asyncKey: Symbol);
+  beginInsert(asyncKey: Symbol);
+  commit(asyncKey: Symbol, item: T);
+  delete(asyncKey: Symbol, item: T);
+  discardEdit(asyncKey: Symbol, item: T);
+  filterBy(asyncKey: Symbol, key: keyof T, val: any);
 }
 
 export type ListBaseProps<T> = ListAttributes<T> & ListActions<T>;
@@ -26,8 +26,6 @@ export type ListBaseProps<T> = ListAttributes<T> & ListActions<T>;
 export type ListProps<T> = ListBaseProps<T> & WithRouter<ListBaseProps<T>> &
   //tslint:disable-next-line
   ({ componentRef?: (x: IAsyncComponent) => void } | IDetailsListProps);
-
-let _instanceCount = 0;
 
 /**
  * generic list view
@@ -40,8 +38,8 @@ export class GenericList<T> extends BaseComponent<ListProps<T>, AsyncComponentSt
   }
 
   @lazy()
-  public get key(): string {
-    return `GenericList_${_instanceCount++}`;
+  public get key(): Symbol {
+    return Symbol();
   }
 
   public updateAsyncState(next: AsyncState) {

@@ -4,7 +4,7 @@ import { mountComponent, unmountComponent } from '../models/asyncComponentTracke
 
 export const asyncState = <T>(target: new (...args: any[]) => T) => {
   function outer(...args) {
-    return new target(args);
+    return new target(...args);
   }
 
   outer.prototype = target.prototype;

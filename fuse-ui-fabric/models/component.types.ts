@@ -16,6 +16,6 @@ export interface AsyncComponentState {
 }
 
 export interface IAsyncComponent {
-  readonly key: string;
+  readonly key: Symbol;
   updateAsyncState(next: AsyncState);
 }
