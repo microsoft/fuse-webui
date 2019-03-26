@@ -1,4 +1,3 @@
-import { lazy } from '@fuselab/ui-shared';
 import { BaseComponent } from '@uifabric/utilities/lib';
 import { DetailsList, IDetailsListProps } from 'office-ui-fabric-react/lib-commonjs/DetailsList';
 import * as React from 'react';
