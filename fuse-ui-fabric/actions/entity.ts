@@ -21,7 +21,7 @@ export enum EntityActions {
 //tslint:disable:no-reserved-keywords
 export interface BaseEntity<TN> extends ErrorAction {
   target: TN;
-  asyncKey?: string;
+  asyncKey?: Symbol;
 }
 
 export interface BeginInsert<T, TN> extends BaseEntity<TN> {
@@ -75,7 +75,7 @@ export interface QueryResult<T, TN> extends BaseEntity<TN> {
 
 export type EntityAction<T, TN> = QueryEntities<TN> | QueryResult<T, TN> | FetchEntity<TN> | FetchResult<T, TN>;
 
-export const beginQuery = <TN>(target: TN, query: string, asyncKey: string, skip?: number, take?: number): QueryEntities<TN> => ({
+export const beginQuery = <TN>(target: TN, query: string, asyncKey: Symbol, skip?: number, take?: number): QueryEntities<TN> => ({
   type: EntityActions.query,
   target,
   query,
@@ -84,14 +84,14 @@ export const beginQuery = <TN>(target: TN, query: string, asyncKey: string, skip
   take
 });
 
-export const beginUpdate = <T, TN>(target: TN, entity: T, asyncKey: string): UpdateEntity<T, TN> => ({
+export const beginUpdate = <T, TN>(target: TN, entity: T, asyncKey: Symbol): UpdateEntity<T, TN> => ({
   type: EntityActions.update,
   target,
   entity,
   asyncKey
 });
 
-export const beginDelete = <T, TN>(target: TN, entity: T, asyncKey: string): DeleteEntity<T, TN> => ({
+export const beginDelete = <T, TN>(target: TN, entity: T, asyncKey: Symbol): DeleteEntity<T, TN> => ({
   type: EntityActions.delete,
   target,
   entity,

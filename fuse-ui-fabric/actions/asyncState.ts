@@ -6,11 +6,11 @@ export enum Actions {
 
 export interface UpdateAsyncState {
   type: Actions.updateAsyncState;
-  key: string;
+  key: Symbol;
   asyncState: AsyncState;
 }
 
-export const updateAsyncState = (key: string, asyncState: AsyncState) => ({
+export const updateAsyncState = (key: Symbol, asyncState: AsyncState) => ({
   type: Actions.updateAsyncState,
   key,
   asyncState

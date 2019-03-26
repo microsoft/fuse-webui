@@ -7,7 +7,7 @@ export interface ListAttributes<T> {
 }
 
 export interface ListActions<T> {
-  list();
+  list(asyncKey?: Symbol);
   save(item: T);
   delete(item: T);
   insert();
