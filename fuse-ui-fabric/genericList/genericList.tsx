@@ -31,19 +31,10 @@ export type ListProps<T> = ListBaseProps<T> & WithRouter<ListBaseProps<T>> &
  * generic list view
  */
 @asyncState
-export class GenericList<T> extends BaseComponent<ListProps<T>, AsyncComponentState> implements IAsyncComponent {
+export class GenericList<T> extends BaseComponent<ListProps<T>, AsyncComponentState> {
   constructor(props: ListProps<T>) {
     super(props);
     this.state = { asyncState: AsyncState.loading };
-  }
-
-  @lazy()
-  public get key(): Symbol {
-    return Symbol();
-  }
-
-  public updateAsyncState(next: AsyncState) {
-    this.setState({ asyncState: next });
   }
 
   public render(): JSX.Element {

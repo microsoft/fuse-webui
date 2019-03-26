@@ -27,4 +27,12 @@ describe('asyncState decorator', () => {
     const view = shallow(<Simple />);
     expect(view).toBeTruthy();
   });
+
+  it('inject updateAsyncState and key', () => {
+    const s: any = new Simple({});
+    expect(typeof (s.updateAsyncState)).toBe('function');
+    expect(typeof (s.key)).toBe('symbol');
+    expect(s.key.toString()).toBe('Symbol()');
+  });
+
 });

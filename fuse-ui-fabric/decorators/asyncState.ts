@@ -4,7 +4,15 @@ import { mountComponent, unmountComponent } from '../models/asyncComponentTracke
 
 export const asyncState = <T>(target: new (...args: any[]) => T) => {
   function outer(...args) {
-    return new target(...args);
+    const instance: any = new target(...args);
+    if (!instance.key) {
+      Object.defineProperty(instance, 'key', {
+        writable: false,
+        value: Symbol()
+      });
+    }
+
+    return instance;
   }
 
   outer.prototype = target.prototype;
@@ -23,6 +31,10 @@ export const asyncState = <T>(target: new (...args: any[]) => T) => {
     if (origUnmount) {
       origUnmount.apply(this);
     }
+  };
+
+  outer.prototype.updateAsyncState = outer.prototype.updateAsyncState || function (next) {
+    this.setState({ asyncState: next });
   };
 
   return <any>outer;
