@@ -5,10 +5,13 @@ import { mountComponent, unmountComponent } from '../models/asyncComponentTracke
 export const asyncState = <T>(target: new (...args: any[]) => T) => {
   function outer(...args) {
     const instance: any = new target(...args);
+    const key = instance.key || Symbol();
+    instance.state = { asyncKey: key };
+
     if (!instance.key) {
       Object.defineProperty(instance, 'key', {
         writable: false,
-        value: Symbol()
+        value: key
       });
     }
 

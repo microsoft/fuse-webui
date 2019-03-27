@@ -30,6 +30,7 @@ describe('asyncState decorator', () => {
 
   it('inject updateAsyncState and key', () => {
     const s: any = new Simple({});
+    expect(s.state.asyncKey === s.key).toBeTruthy();
     expect(typeof (s.updateAsyncState)).toBe('function');
     expect(typeof (s.key)).toBe('symbol');
     expect(s.key.toString()).toBe('Symbol()');

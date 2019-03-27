@@ -33,7 +33,7 @@ export type ListProps<T> = ListBaseProps<T> & WithRouter<ListBaseProps<T>> &
 export class GenericList<T> extends BaseComponent<ListProps<T>, AsyncComponentState> {
   constructor(props: ListProps<T>) {
     super(props);
-    this.state = { asyncState: AsyncState.loading };
+    this.state = { ...this.state, asyncState: AsyncState.loading };
   }
 
   public render(): JSX.Element {
