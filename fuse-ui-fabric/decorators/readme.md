@@ -64,7 +64,7 @@ const mapDispatchToProps = (asyncKey: Symbol) => (dispatch: Dispatch<Store>) => 
     actionNames);
 }
 
-export default asyncConnect()(mapStoreToProps, mapDispatchToProps);
+export default asyncConnect(TodoList)(mapStoreToProps, mapDispatchToProps);
 ```
 
 ## update component state as part of redux saga
