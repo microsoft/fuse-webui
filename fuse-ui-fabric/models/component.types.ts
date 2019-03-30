@@ -12,7 +12,6 @@ export enum AsyncState {
 }
 
 export interface AsyncComponentState {
-  readonly asyncKey: Symbol;
   asyncState: AsyncState;
 }
 

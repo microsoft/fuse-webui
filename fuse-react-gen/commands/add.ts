@@ -37,11 +37,14 @@ export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise
   let realTarget = target;
   if (isDir(source)) {
     const configPath = resolve(source, '.react-gen-rc.json');
+    logger.verbose(`configPath = ${configPath}`);
     if (existsSync(configPath)) {
       const config = await parseAgainstConfig(configPath, (extra || process.argv).join(' '));
       const genTarget = config._react_gen_target;
       if (genTarget) {
+        logger.info('creating transforms');
         const transforms = generateTransformSync(source);
+        logger.info('transforms created');
         const data = <any>{ capitalize, ...transforms, ...config };
         logger.info(`data = ${JSON.stringify(data, null, 2)}`);
         const isFolder = Array.isArray(genTarget) && genTarget.length > 1;
@@ -59,7 +62,7 @@ export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise
         }
       } else {
         ensurePath(realTarget);
-        await transformFolder(yargs().parse(argv._), source, realTarget);
+        await transformFolder(config, source, realTarget);
       }
       glob.sync(`${realTarget}/**/*.*`, { ignore: `${target}/node_modules/**/*` }).map(x => {
         logger.info(`${x} created`);
