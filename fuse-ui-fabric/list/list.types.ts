@@ -1,13 +1,14 @@
 import { IColumn } from 'office-ui-fabric-react/lib-commonjs/DetailsList';
 
 export interface ListAttributes<T> {
+  asyncKey: Symbol;
   items: T[];
   selectedItem: T;
   rollbackItem: T;
 }
 
 export interface ListActions<T> {
-  list(asyncKey?: Symbol);
+  list();
   save(item: T);
   delete(item: T);
   insert();

@@ -4,6 +4,7 @@ import * as glob from 'glob';
 import * as path from 'path';
 import { createInterface } from 'readline';
 import * as _ from 'underscore';
+import logger from './logger';
 import { ensurePath, isDir, Mappable } from './utils';
 
 export type Data = { [key: string]: string | Function };
@@ -35,9 +36,16 @@ export async function transformFileToLines(src: string, data: Data): Promise<str
   });
 
   const outputLines = [];
+  let lineNumber = 0;
   lines.on('line', (x) => {
-    const y = transformLine(data, x);
-    outputLines.push(y);
+    lineNumber++;
+    try {
+      const y = transformLine(data, x);
+      outputLines.push(y);
+    } catch (ex) {
+      logger.error(`Failed at '${src}' line# ${lineNumber}: ${x}`);
+      throw ex;
+    }
   });
 
   return new Promise<string[]>(resolve => {
@@ -101,7 +109,7 @@ export function generateMappable<T>(src: string, generate: (x: string) => T): Ma
 }
 
 export function generateTransformSync(src: string): Mappable<(data: Data) => string[]> {
-  return generateMappable(src, x => transformFileToLinesSync.bind(null, x));
+  return generateMappable(src, x => data => transformFileToLinesSync.bind(null, x, data));
 }
 
 export function generateTransform(src: string): Mappable<(data: Data) => Promise<string[]>> {
