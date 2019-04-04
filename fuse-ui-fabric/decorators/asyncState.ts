@@ -1,3 +1,5 @@
+//tslint:disable-next-line
+const Symbol = require('es6-symbol');
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
