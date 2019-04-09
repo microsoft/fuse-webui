@@ -27,13 +27,14 @@ module.exports = {
       }
     };
   },
-  plugins: (name, version) => [
+  plugins: (name, version, title, templatePath) => [
     new webpack.DefinePlugin({
       'BASENAME': JSON.stringify('/'),
       'VERSION': JSON.stringify(version)
     }),
     new HtmlWebpackPlugin({
-      template: '../index.webpack-devserver.html',
+      template: templatePath || '../index.webpack-devserver.html',
+      title: title,
       inject: 'body',
       filename: `./${name}.debug.html`
     })]

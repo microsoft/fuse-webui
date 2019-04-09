@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-const prod = require('../webpack.prod');
+const prod = require('@fuselab/build-config/webpack.prod');
 const common = require('./webpack.common');
 const package = require('./package.json');
 const version = `v${package.version}`;

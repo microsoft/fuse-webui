@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.core.json",
+  "extends": "@fuselab/build-config/tsconfig.core.json",
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "./lib",

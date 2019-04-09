@@ -1,6 +1,6 @@
 {
   "extends": [
-    "../tslint.json"
+    "@fuselab/build-config/tslint.json"
   ],
   "linterOptions": {
     "exclude": [
