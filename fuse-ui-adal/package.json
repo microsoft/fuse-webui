@@ -1,11 +1,8 @@
 {
   "name": "@fuselab/ui-adal",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "azure login ui",
   "main": "lib/index.js",
-  "bin": {
-    "react-gen": "./bin/react-gen"
-  },
   "scripts": {
     "test": "jest",
     "build": "webpack",
