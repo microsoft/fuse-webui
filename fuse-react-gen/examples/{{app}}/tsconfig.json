@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.react.json",
+  "extends": "@fuselab/build-config/tsconfig.react.json",
   "compilerOptions": {
     "module": "amd",
     "outDir": "./built",

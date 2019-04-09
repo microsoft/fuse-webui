@@ -1,4 +1,4 @@
-import { preference, user } from '@fuselab/ui-fabric/reducers';
+import { preference, user } from '@fuselab/ui-fabric/lib/reducers';
 import { combineReducers } from 'redux';
 import { Store } from '../store';
 import authContext from './authContext';

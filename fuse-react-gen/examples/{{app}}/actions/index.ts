@@ -1,5 +1,5 @@
-import * as Adal from '@fuselab/ui-adal';
-import * as BaseNames from '@fuselab/ui-fabric/actions';
+import * as Adal from '@fuselab/ui-adal/lib';
+import * as BaseNames from '@fuselab/ui-fabric/lib/actions';
 //tslint:disable:no-reserved-keywords
 
 export namespace ActionNames {

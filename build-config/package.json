@@ -1,6 +1,6 @@
 {
   "name": "@fuselab/build-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "common build configurations for typescript script based React web app with webpack and jest",
   "main": "index.js",
   "scripts": {

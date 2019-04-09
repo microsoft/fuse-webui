@@ -1,5 +1,5 @@
 /* tslint:disable:no-use-before-declare */
-import { lazy } from '@fuselab/ui-shared';
+import { lazy } from '@fuselab/ui-shared/lib';
 import { IconNames } from '@uifabric/icons';
 import { BaseComponent, IBaseProps } from '@uifabric/utilities/lib';
 import { CommandBar } from 'office-ui-fabric-react/lib-commonjs/CommandBar';

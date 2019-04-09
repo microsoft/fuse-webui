@@ -2,9 +2,9 @@ import {
   AdalAuthContext,
   adalSagas,
   UserResult
-} from '@fuselab/ui-adal';
-import { getLoggedInUserSucceeded } from '@fuselab/ui-fabric/actions/login';
-import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
+} from '@fuselab/ui-adal/lib';
+import { getLoggedInUserSucceeded } from '@fuselab/ui-fabric/lib/actions/login';
+import { callbackToPromise } from '@fuselab/ui-shared/lib/asyncUtils';
 import { all, fork, put, select, takeLatest } from 'redux-saga/effects';
 import { ActionNames } from '../actions';
 import { Store } from '../store';

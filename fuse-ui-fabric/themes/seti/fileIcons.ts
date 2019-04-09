@@ -1,4 +1,4 @@
-import { pathExt } from '@fuselab/ui-shared';
+import { pathExt } from '@fuselab/ui-shared/lib';
 import { IStyle } from '@uifabric/styling/lib';
 import { IconDefinition, IconThemeCore } from './seti.types';
 import { SetiTheme } from './setiTheme';

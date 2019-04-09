@@ -1,4 +1,4 @@
-import { Deferred, lazy } from '@fuselab/ui-shared';
+import { Deferred, lazy } from '@fuselab/ui-shared/lib';
 import { DefaultButton } from 'office-ui-fabric-react/lib-commonjs/Button';
 import { Dialog, DialogFooter, DialogType, IDialogContentProps } from 'office-ui-fabric-react/lib-commonjs/Dialog';
 import { BaseComponent, IBaseProps } from 'office-ui-fabric-react/lib-commonjs/Utilities';

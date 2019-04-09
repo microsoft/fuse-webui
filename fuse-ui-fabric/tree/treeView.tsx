@@ -1,4 +1,4 @@
-import { createDeferred, first, last, lazy, trackEvent } from '@fuselab/ui-shared';
+import { createDeferred, first, last, lazy, trackEvent } from '@fuselab/ui-shared/lib';
 import { BaseComponent, KeyCodes } from '@uifabric/utilities/lib';
 import { ContextualMenu, IContextualMenuItem } from 'office-ui-fabric-react/lib-commonjs/ContextualMenu';
 import * as React from 'react';

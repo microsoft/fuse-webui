@@ -1,4 +1,4 @@
-import { ErrorAction } from '@fuselab/ui-fabric/actions/action.types';
+import { ErrorAction } from '@fuselab/ui-fabric/lib/actions/action.types';
 import { TenantInfo } from '../adalContext';
 import { Actions } from './adal.types';
 

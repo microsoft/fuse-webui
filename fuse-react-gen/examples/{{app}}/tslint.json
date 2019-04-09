@@ -1,8 +1,10 @@
 {
-    "extends": ["../tslint.json"],
-    "linterOptions": {
-        "exclude": [
-            "..\/intercom-generated\/**"
-        ]
-    }
+  "extends": [
+    "@fuselab/build-config/tslint.json"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "..\/intercom-generated\/**"
+    ]
+  }
 }
