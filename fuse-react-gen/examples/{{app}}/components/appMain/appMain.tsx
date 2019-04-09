@@ -1,5 +1,5 @@
 /* tslint:disable:no-use-before-declare */
-import login from '@fuselab/ui-fabric/login';
+import login from '@fuselab/ui-fabric/lib/login';
 import * as H from 'history';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib-commonjs/pivot';
 import * as React from 'react';

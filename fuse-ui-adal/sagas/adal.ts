@@ -1,5 +1,5 @@
-import * as BaseActions from '@fuselab/ui-fabric/actions';
-import { callbackToPromise } from '@fuselab/ui-shared/asyncUtils';
+import * as BaseActions from '@fuselab/ui-fabric/lib/actions';
+import { callbackToPromise } from '@fuselab/ui-shared/lib/asyncUtils';
 import * as AuthContext from 'adal-angular';
 //tslint:disable-next-line:no-unused-variable
 import { all, AllEffect, call, fork, put, select, take, takeLatest } from 'redux-saga/effects';

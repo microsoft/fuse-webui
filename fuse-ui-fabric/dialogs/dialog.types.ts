@@ -1,4 +1,4 @@
-import { Deferred } from '@fuselab/ui-shared';
+import { Deferred } from '@fuselab/ui-shared/lib';
 import * as React from 'react';
 
 export interface DialogState<T> {

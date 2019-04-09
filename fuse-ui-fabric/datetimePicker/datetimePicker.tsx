@@ -1,4 +1,4 @@
-import { lazy } from '@fuselab/ui-shared';
+import { lazy } from '@fuselab/ui-shared/lib';
 import { BaseComponent, IBaseProps } from '@uifabric/utilities/lib';
 import { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib-commonjs/DatePicker';
 import * as React from 'react';

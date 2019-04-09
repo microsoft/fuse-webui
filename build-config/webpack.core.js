@@ -1,10 +1,12 @@
 const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const CopyPlugin = require('copy-webpack-plugin');
+const {resolve} = require('path');
+const vendorPath = resolve(__dirname, './vendor.ts');
 
 module.exports = {
   entry: {
-    vendor: '../vendor.ts'
+    vendor: vendorPath
   },
   devtool: 'source-map',
   resolve: {

@@ -1,4 +1,4 @@
-import { lazy } from '@fuselab/ui-shared';
+import { lazy } from '@fuselab/ui-shared/lib';
 import { ContentBlock, ContentState, Editor, EditorState } from 'draft-js';
 import * as React from 'react';
 import { AnnotatedText, Annotation } from '../models';

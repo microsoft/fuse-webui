@@ -1,4 +1,4 @@
-import { parseCookie } from '@fuselab/ui-shared';
+import { parseCookie } from '@fuselab/ui-shared/lib';
 import { Preference } from './themes.types';
 
 const defaultPreference: Preference = { compact: false, theme: 'light' };

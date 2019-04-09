@@ -1,4 +1,4 @@
-import { lazy } from '@fuselab/ui-shared';
+import { lazy } from '@fuselab/ui-shared/lib';
 import { BaseComponent } from '@uifabric/utilities/lib';
 import * as React from 'react';
 import classNames from './tree.classNames';
