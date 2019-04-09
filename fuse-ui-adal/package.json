@@ -46,6 +46,7 @@
     "react-router-dom": "~4.2.2"
   },
   "devDependencies": {
+    "@fuselab/build-config": "^1.0.0",
     "@types/adal-angular": "^1.0.1",
     "@types/fetch-mock": "^6.0.3",
     "awesome-typescript-loader": "5.2.1",

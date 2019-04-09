@@ -1,6 +1,7 @@
 {
   "lerna": "2.1.2",
   "packages": [
+    "build-config",
     "fuse-ui-adal",
     "fuse-ui-shared",
     "fuse-ui-fabric",

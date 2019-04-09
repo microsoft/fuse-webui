@@ -57,6 +57,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "@fuselab/build-config": "^1.0.0",
     "@types/jasmine": "^2.8.6",
     "@types/underscore": "^1.8.7",
     "awesome-typescript-loader": "5.2.1",

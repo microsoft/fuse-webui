@@ -1,0 +1,14 @@
+{
+  "name": "@fuselab/build-config",
+  "version": "1.0.0",
+  "description": "common build configurations for typescript script based React web app with webpack and jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo no test",
+    "tslint": "echo no lint",
+    "build": "echo no build",
+    "build-all": "echo no build-all"
+  },
+  "author": "hailiu@gmail.com",
+  "license": "MS-PL"
+}
