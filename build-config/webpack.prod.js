@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const prodPath = path.resolve(__dirname, './index.webpack-prod.html');
 
 module.exports = {
   plugins: (name, version, title, templatePath) => [
@@ -16,7 +17,7 @@ module.exports = {
       sourceMap: true
     }),
     new HtmlWebpackPlugin({
-      template:  templatePath || '../index.webpack-prod.html',
+      template:  templatePath || prodPath,
       title: title,
       inject: 'body',
       filename: `./${name}.prod.html`

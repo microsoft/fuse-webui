@@ -1,0 +1,21 @@
+<!DOCType html>
+<html lang="en-US">
+
+<head>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <link rel="stylesheet" href="/assets/css/fabric.min.css">
+  <!-- for live reload -->
+  <script src="/webpack-dev-server.js"></script>
+</head>
+<script>
+  var cdnRoot = "//" + window.location.host;
+</script>
+
+<body style='margin: 0;overflow-y: hidden'>
+  <div id='root'>
+  </div>
+</body>
+
+</html>

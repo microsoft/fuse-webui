@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const devserverPath = path.resolve(__dirname, './index.webpack-devserver.html');
 
 module.exports = {
   devServer: (name, version, apiServerHost, port) => {
@@ -33,7 +34,7 @@ module.exports = {
       'VERSION': JSON.stringify(version)
     }),
     new HtmlWebpackPlugin({
-      template: templatePath || '../index.webpack-devserver.html',
+      template: templatePath || devserverPath,
       title: title,
       inject: 'body',
       filename: `./${name}.debug.html`
