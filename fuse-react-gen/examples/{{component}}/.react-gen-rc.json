@@ -12,6 +12,13 @@
     "type": "string",
     "default": "{{pascalCase(component)}}"
   },
+  "componentName": {
+    "alias": "cn",
+    "required": false,
+    "describe": "camelCased object name",
+    "type": "string",
+    "default": "{{camelCase(component)}}"
+  },
   "_react_gen_target": {
     "alias": "gt",
     "required": false,

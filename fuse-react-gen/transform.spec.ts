@@ -61,7 +61,8 @@ describe('transformFolder', () => {
   it('transformFolder', async () => {
     const data: Data = {
       Component: 'Tree',
-      component: 'tree'
+      component: 'tree',
+      componentName: 'tree'
     };
 
     const src = './examples/{{component}}';

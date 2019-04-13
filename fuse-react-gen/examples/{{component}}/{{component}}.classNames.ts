@@ -1,6 +1,6 @@
 import { mergeStyleSets } from '@uifabric/merge-styles';
 
-const {{ component }}ClassNames = (): { [key: string]: string } => mergeStyleSets(<any>{
+const {{ componentName }}ClassNames = (): { [key: string]: string } => mergeStyleSets(<any>{
 });
 
-export default {{ component }}ClassNames;
+export default {{ componentName }}ClassNames;

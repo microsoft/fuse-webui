@@ -1,4 +1,4 @@
-import { capitalize } from '@fuselab/ui-shared/lib/stringCases';
+import { camelCase, capitalize, pascalCase } from '@fuselab/ui-shared/lib/stringCases';
 import { existsSync } from 'fs';
 import * as glob from 'glob';
 import { basename, resolve } from 'path';
@@ -35,17 +35,18 @@ export interface ARGV {
 export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise<string> {
   const { source, target } = argv;
   let realTarget = target;
+  const helpers = { capitalize, camelCase, pascalCase };
   if (isDir(source)) {
     const configPath = resolve(source, '.react-gen-rc.json');
     logger.verbose(`configPath = ${configPath}`);
     if (existsSync(configPath)) {
-      const config = await parseAgainstConfig(configPath, (extra || process.argv).join(' '));
+      const config: Arguments = { ...helpers, ...await parseAgainstConfig(configPath, (extra || process.argv).join(' ')) };
       const genTarget = config._react_gen_target;
       if (genTarget) {
         logger.info('creating transforms');
         const transforms = generateTransformSync(source);
         logger.info('transforms created');
-        const data = <any>{ capitalize, ...transforms, ...config };
+        const data = <any>{ ...transforms, ...config };
         logger.info(`data = ${JSON.stringify(data, null, 2)}`);
         const isFolder = Array.isArray(genTarget) && genTarget.length > 1;
         const transformedSource = _.template(source)(data);
