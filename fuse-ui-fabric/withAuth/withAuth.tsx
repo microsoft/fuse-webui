@@ -15,7 +15,7 @@ export interface WithAuthAttributes {
 
 export type WithAuthProps = WithAuthAttributes & WithAuthActions;
 
-export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentClass<P & WithAuthProps & React.RefAttributes<any>>, ...roles: string[]) =>
+export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentClass<P & WithAuthProps>, ...roles: string[]) =>
   class WithAuth extends React.Component<P & WithAuthProps> {
     public render(): JSX.Element {
       if (this.props.user || (this.props.isLogin && this.props.isLogin(this.props.history))) {
