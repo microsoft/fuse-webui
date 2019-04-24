@@ -19,7 +19,17 @@ export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentCla
   class WithAuth extends React.Component<P & WithAuthProps> {
     public render(): JSX.Element {
       if (this.props.user || (this.props.isLogin && this.props.isLogin(this.props.history))) {
-        return <Inner {...this.props} />;
+        if (this.props.user && !this.authorized) {
+          return (
+            <div className={classNames().root}>
+              <section>
+                <h2>You don't have access</h2>
+              </section>
+            </div>
+          );
+        } else {
+          return <Inner {...this.props} />;
+        }
       } else {
         return (
           <div className={classNames().root}>
@@ -36,5 +46,12 @@ export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentCla
       return () => {
         this.props.login(this.props.history);
       };
+    }
+
+    private get authorized(): boolean {
+      const userRoles = (this.props.user ? this.props.user.roles : []) || [];
+
+      return this.props.user &&
+        (roles.length === 0 || !!roles.find(x => userRoles.indexOf(x) >= 0));
     }
   };
