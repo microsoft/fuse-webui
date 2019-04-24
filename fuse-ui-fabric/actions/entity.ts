@@ -15,7 +15,9 @@ export enum EntityActions {
   fetched = 'entity.fetched',
   query = 'entity.query',
   querying = 'entity.querying',
-  queried = 'entity.queried'
+  queried = 'entity.queried',
+  selectAll = 'entity.selectAll',
+  select = 'entity.select'
 }
 
 //tslint:disable:no-reserved-keywords
@@ -63,6 +65,7 @@ export interface FetchResult<T, TN> extends BaseEntity<TN> {
 export interface QueryEntities<TN> extends BaseEntity<TN> {
   type: EntityActions.query;
   query: string;
+  continuationToken?: string;
   skip?: number;
   take?: number;
 }
@@ -71,9 +74,22 @@ export interface QueryResult<T, TN> extends BaseEntity<TN> {
   type: EntityActions.queried;
   items: T[];
   hasMore: boolean;
+  prevToken?: string;
+  continuationToken?: string;
 }
 
-export type EntityAction<T, TN> = QueryEntities<TN> | QueryResult<T, TN> | FetchEntity<TN> | FetchResult<T, TN>;
+export interface SelectEntity<T, TN> extends BaseEntity<TN> {
+  type: EntityActions.select;
+  entity: T;
+  select: boolean;
+}
+
+export interface SelectAll<T, TN> extends BaseEntity<TN> {
+  type: EntityActions.selectAll;
+  select: boolean;
+}
+
+export type EntityAction<T, TN> = QueryEntities<TN> | QueryResult<T, TN> | FetchEntity<TN> | FetchResult<T, TN> | SelectEntity<T, TN> | SelectAll<T, TN>;
 
 export const beginQuery = <TN>(target: TN, query: string, asyncKey: Symbol, skip?: number, take?: number): QueryEntities<TN> => ({
   type: EntityActions.query,
@@ -109,4 +125,17 @@ export const beginInsert = <T, TN>(target: TN, entity: T): BeginInsert<T, TN> =>
   type: EntityActions.beginInsert,
   target,
   entity
+});
+
+export const selectEntity = <T, TN>(target: TN, entity: T, select: boolean): SelectEntity<T, TN> => ({
+  type: EntityActions.select,
+  target,
+  entity,
+  select
+});
+
+export const selectAll = <T, TN>(target: TN, select: boolean): SelectAll<T, TN> => ({
+  type: EntityActions.selectAll,
+  target,
+  select
 });
