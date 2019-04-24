@@ -1,4 +1,5 @@
 export enum AsyncState {
+  initializing = 'initializing',
   loading = 'loading',
   loaded = 'loaded',
   updating = 'updating',

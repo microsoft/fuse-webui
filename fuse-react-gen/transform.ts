@@ -7,7 +7,7 @@ import * as _ from 'underscore';
 import logger from './logger';
 import { ensurePath, isDir, Mappable } from './utils';
 
-export type Data = { [key: string]: string | Function };
+export type Data = { [key: string]: string | Function | string[] };
 
 export interface Link {
   src: string;
