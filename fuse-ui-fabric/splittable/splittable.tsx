@@ -31,6 +31,25 @@ export function layoutStack(max: number, parts: number[], index: number, delta: 
   return cur;
 }
 
+function handleResize(props: SplittableProps, resize: (delta: number) => void, e: React.KeyboardEvent) {
+  const key = e.key;
+  let delta = 0;
+  if (props.orientation === 'vertical') {
+    if (key === 'ArrowLeft') {
+      delta = -12;
+    } else if (key === 'ArrowRight') {
+      delta = 12;
+    }
+  } else if (props.orientation === 'horizontal') {
+    if (key === 'ArrowUp') {
+      delta = -12;
+    } else if (key === 'ArrowDown') {
+      delta = 12;
+    }
+  }
+  resize(delta);
+}
+
 export const Splittable = (props: SplittableProps) => {
   const [partitions, setState] = React.useState<number[]>([]);
   const classes = classNames(props.orientation);
@@ -41,7 +60,6 @@ export const Splittable = (props: SplittableProps) => {
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-
   // render a part with part container
   const renderPartOnly = (part: Func<JSX.Element>, index: number) => ([(
     <div
@@ -83,6 +101,13 @@ export const Splittable = (props: SplittableProps) => {
         setState(next);
       }
     };
+    const resize = (delta: number) => {
+      const root = rootRef.current;
+      const next = layoutStack(root.clientWidth, partitions, index - 1, delta);
+      setState(next);
+    };
+
+    const handleKeyboard = handleResize.bind(null, props, resize);
 
     return [(
       <div
@@ -90,9 +115,12 @@ export const Splittable = (props: SplittableProps) => {
         className={classes.divider}
         key={`split_divider_${index}`}
         draggable={true}
+        onKeyDown={handleKeyboard}
         onDragStart={onStart}
         onDrag={null}
         onDragEnd={onDrag}
+        tabIndex={0}
+        role='separator'
       />),
     ...renderPartOnly(part, index)
     ];
