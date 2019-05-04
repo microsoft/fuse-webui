@@ -7,17 +7,18 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const prodPath = path.resolve(__dirname, './index.webpack-prod.html');
 
 module.exports = {
+  optimization: {
+    minimize: true
+  },
+  mode: 'none',
   plugins: (name, version, title, templatePath) => [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
       'BASENAME': JSON.stringify('/apps/' + name),
       'VERSION': JSON.stringify(version)
     }),
-    new UglifyJSPlugin({
-      sourceMap: true
-    }),
     new HtmlWebpackPlugin({
-      template:  templatePath || prodPath,
+      template: templatePath || prodPath,
       title: title,
       inject: 'body',
       filename: `./${name}.prod.html`
