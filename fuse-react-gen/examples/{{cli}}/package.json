@@ -1,13 +1,14 @@
 {
-  "name": "@fuselab/react-gen",
-  "version": "1.6.7",
-  "description": "code gen tool for react.js in typescript",
+  "name": "{{package}}",
+  "aadAppId": "12916cf1-b629-4ddf-b699-5a7d3035b38e",
+  "version": "{{version}}",
+  "description": "cli app for {{cli}} ",
   "main": "./lib/cli.js",
   "bin": {
-    "fuse-gen": "./lib/cli.js"
+    "{{cli}}": "./lib/cli.js"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "build": "tsc",
     "build-all": "tsc",
     "build-prod": "tsc",
@@ -17,23 +18,22 @@
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
+      "js",
+      "json"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest/preprocessor.js"
+      "^.+\\.(ts|tsx)$": "ts-jest"
     },
     "testMatch": [
       "**/*.spec.(ts|tsx)"
     ],
-    "testPathIgnorePatterns": [
-      "/examples/"
-    ],
     "collectCoverage": true,
     "coverageDirectory": "./coverage",
-    "testURL": "http://localhost/"
+    "testURL": "http://localhost"
   },
+  "license": "MIT",
   "dependencies": {
-    "@fuselab/ui-shared": "^1.1.0",
+    "@fuselab/ui-shared": "~1.5.3",
     "chalk": "^2.4.2",
     "glob": "^7.1.3",
     "graceful-fs": "4.1.15",
@@ -54,19 +54,12 @@
     "jest": "^22.1.4",
     "merge": "1.2.1",
     "original": "1.0.2",
+    "ts-jest": "~22.0.1",
     "tslint": "5.12.1",
     "tslint-microsoft-contrib": "~5.0.2",
     "tslint-react": "~3.4.0",
     "typescript": "3.2.4",
-    "uglify-js": "3.4.9",
-    "uglifyjs-webpack-plugin": "2.1.1",
     "webpack": "4.29.0",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "3.1.14"
-  },
-  "author": "hailiu@gmail.com",
-  "license": "ISC",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "webpack-cli": "^3.2.1"
   }
 }

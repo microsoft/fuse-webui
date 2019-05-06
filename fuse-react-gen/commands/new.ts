@@ -10,7 +10,7 @@ export const builder = {
     alias: 'k',
     required: true,
     type: 'string',
-    describe: 'type to create: [\'app\' | \'action\' | \'component\']'
+    describe: 'type to create: [\'app\' | \'cli\' | \'action\' | \'component\']'
   },
   dest: {
     alias: 'a',
@@ -20,7 +20,7 @@ export const builder = {
   }
 };
 
-export type CodeKind = 'app' | 'action' | 'component';
+export type CodeKind = 'app' | 'action' | 'component' | 'cli';
 
 export interface ARGV {
   kind: CodeKind;
@@ -38,6 +38,9 @@ export async function handler(argv: ARGV & Arguments): Promise<string> {
     },
     component: {
       source: 'examples/{{component}}'
+    },
+    cli: {
+      source: 'examples/{{cli}}'
     }
   };
 
