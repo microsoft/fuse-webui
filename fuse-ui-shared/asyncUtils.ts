@@ -1,3 +1,4 @@
+import { asArray, asIter, chunks, map } from './iterator';
 export interface CallbackFunc<T> {
   (e: Error, r: T);
 }
@@ -5,24 +6,24 @@ export interface CallbackFunc<T> {
 export type NodeAsyncCall<T> = {
   (callback: CallbackFunc<T>);
 } | {
-    (arg1: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, arg3: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, arg3: any, arg4: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, arg7: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, arg7: any, arg8: any, callback: CallbackFunc<T>);
-  } | {
-    (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, arg7: any, arg8: any, arg9: any, callback: CallbackFunc<T>);
-  };
+  (arg1: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, arg3: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, arg3: any, arg4: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, arg7: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, arg7: any, arg8: any, callback: CallbackFunc<T>);
+} | {
+  (arg1: any, arg2: any, arg3: any, arg4: any, arg5: any, arg6: any, arg7: any, arg8: any, arg9: any, callback: CallbackFunc<T>);
+};
 
 export async function callbackToPromise<T>(func: NodeAsyncCall<T>, ...args: any[]): Promise<T> {
   return new Promise<any>((res, rej) => {
@@ -42,4 +43,13 @@ export async function callbackToPromise<T>(func: NodeAsyncCall<T>, ...args: any[
 
     func.apply(null, [...args, callback]);
   });
+}
+
+export async function whenAll<T, U>(tasks: U[], mapper: (x: U) => Promise<T>, parallelism: number = 10): Promise<T[]> {
+  let results = [];
+  for (const chunk of chunks(asIter(tasks), parallelism)) {
+    results = [...results, ...(await Promise.all(asArray(map(chunk, mapper))))];
+  }
+
+  return results;
 }

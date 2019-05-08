@@ -89,3 +89,17 @@ export function* asIter<T>(a: T[]) {
     yield v;
   }
 }
+
+export function* chunks<T>(src: IterableIterator<T>, chunkSize: number): IterableIterator<IterableIterator<T>> {
+  let chunk = [];
+  for (const v of src) {
+    chunk.push(v);
+    if (chunk.length === chunkSize) {
+      yield asIter(chunk);
+      chunk = [];
+    }
+  }
+  if (chunk.length) {
+    yield asIter(chunk);
+  }
+}
