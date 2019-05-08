@@ -1,5 +1,5 @@
 ///<reference types='jasmine'/>
-import { asArray, asIter, filter, first, last, map, reduce } from './iterator';
+import { asArray, asIter, chunks, filter, first, last, map, reduce } from './iterator';
 
 function* fib10(): IterableIterator<number> {
   let prev = 0;
@@ -42,5 +42,10 @@ describe('iterator helpers', () => {
     const iter = asIter(arr);
     const result = asArray(iter);
     expect(result).toEqual(arr);
+  });
+
+  it('chunks', () => {
+    const fibChunks = asArray(map(chunks(fib10(), 2), asArray));
+    expect(fibChunks).toEqual([[1, 1], [2, 3], [5, 8], [13, 21], [34, 55]]);
   })
 });

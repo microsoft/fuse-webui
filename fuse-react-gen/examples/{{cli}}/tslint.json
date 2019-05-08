@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@fuselab/build-config/tslint.json"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "package": {
+    "alias": "n",
+    "required": true,
+    "describe": "NPM module name to generated, typically with namespace structure (e.g. @intercom/app)",
+    "type": "string"
+  },
+  "cli": {
+    "alias": "c",
+    "required": true,
+    "describe": "CLI name that would be used to invoke the cli"
+  },
+  "version": {
+    "alias": "v",
+    "required": true,
+    "describe": "version to be written to the generated package.json (e.g. 1.0.1)",
+    "default": "0.0.1"
+  }
+}

@@ -35,6 +35,12 @@ fuse-gen new -k action -a .
 # answer prompts about the actions to be created
 ```
 
+### create new yargs based cli
+
+```bash
+fuse-gen new -k cli -a .
+```
+
 ## Advanced usage
 
 The <kbd>add</kbd> sub command allows you use custom templates to
