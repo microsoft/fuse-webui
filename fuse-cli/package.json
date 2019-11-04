@@ -1,0 +1,52 @@
+{
+  "name": "@fuselab/cli-utils",
+  "version": "1.5.5",
+  "description": "",
+  "main": "built/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "build-all": "tsc",
+    "build-prod": "tsc",
+    "tslint": "tslint -c tslint.json -t stylish --project tsconfig.json"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/*.spec.(ts|tsx)"
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage",
+    "testURL": "http://localhost"
+  },
+  "author": "hailiu@microsoft.com",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "es6-symbol": "^3.1.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "@fuselab/build-config": "^1.0.0",
+    "@types/underscore": "^1.8.7",
+    "awesome-typescript-loader": "5.2.1",
+    "jasmine": "^2.9.0",
+    "jest": "^22.1.4",
+    "merge": "1.2.1",
+    "tslint": "5.12.1",
+    "tslint-microsoft-contrib": "~5.0.2",
+    "typescript": "3.2.4",
+    "webpack": "4.29.0",
+    "webpack-cli": "^3.2.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

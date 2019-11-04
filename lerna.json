@@ -3,6 +3,7 @@
   "packages": [
     "build-config",
     "fuse-ui-adal",
+    "fuse-cli",
     "fuse-ui-shared",
     "fuse-ui-fabric",
     "fuse-react-gen"

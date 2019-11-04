@@ -1,0 +1,11 @@
+{
+  "extends": "@fuselab/build-config/tsconfig.react.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2016",
+    "outDir": "./built",
+    "typeRoots": ["../../node_modules/@types", "../node_modules/@types", "./node_modules/@types"],
+    "types": ["node", "underscore"]
+  },
+  "exclude": ["node_modules", "../node_modules"]
+}
