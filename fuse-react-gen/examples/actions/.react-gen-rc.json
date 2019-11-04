@@ -21,6 +21,8 @@
     "alias": "gt",
     "required": false,
     "describe": "target output type 'file' or 'folder'",
-    "default": "{{model}}.ts"
+    "default": [
+      "{{model}}.ts"
+    ]
   }
 }

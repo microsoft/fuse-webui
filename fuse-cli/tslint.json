@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "@fuselab/build-config/tslint.json"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "**/*.spec.ts"
+    ]
+  }
+}
