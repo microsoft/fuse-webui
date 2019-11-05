@@ -1,11 +1,11 @@
-import { StringCases, toCase } from "@fuselab/ui-shared/lib/stringCases";
-import { appendFileSync, createReadStream, readFileSync, writeFileSync } from "fs";
-import * as glob from "glob";
-import * as path from "path";
-import { createInterface } from "readline";
-import * as _ from "underscore";
-import logger from "./logger";
-import { ensurePath, isDir, Mappable } from "./utils";
+import { StringCases, toCase } from '@fuselab/ui-shared/lib/stringCases';
+import { appendFileSync, createReadStream, readFileSync, writeFileSync } from 'fs';
+import * as glob from 'glob';
+import * as path from 'path';
+import { createInterface } from 'readline';
+import * as _ from 'underscore';
+import logger from './logger';
+import { ensurePath, isDir, Mappable } from './utils';
 
 export type Data = { [key: string]: string | Function | string[] };
 
@@ -25,7 +25,7 @@ export function transformLines(data: Data, src: string[]): string[] {
 }
 
 export function transformFileToLinesSync(src: string, data: Data): string[] {
-  const lines = readFileSync(src, { encoding: "utf-8" }).split(/\n/);
+  const lines = readFileSync(src, { encoding: 'utf-8' }).split(/\n/);
 
   return lines.map(line => transformLine(data, line));
 }
@@ -37,7 +37,7 @@ export async function transformFileToLines(src: string, data: Data): Promise<str
 
   const outputLines = [];
   let lineNumber = 0;
-  lines.on("line", x => {
+  lines.on('line', x => {
     lineNumber++;
     try {
       const y = transformLine(data, x);
@@ -49,7 +49,7 @@ export async function transformFileToLines(src: string, data: Data): Promise<str
   });
 
   return new Promise<string[]>(resolve => {
-    lines.on("close", () => {
+    lines.on('close', () => {
       lines.close();
       resolve(outputLines);
     });
@@ -58,8 +58,8 @@ export async function transformFileToLines(src: string, data: Data): Promise<str
 
 export async function transformFile(data: Data, src: string, target: string): Promise<void> {
   const lines = await transformFileToLines(src, data);
-  writeFileSync(target, lines.join("\n"));
-  appendFileSync(target, "\n");
+  writeFileSync(target, lines.join('\n'));
+  appendFileSync(target, '\n');
 }
 
 export async function transformFolder(data: Data, src: string, target: string): Promise<string[]> {
@@ -94,12 +94,14 @@ export function generateMappable<T>(src: string, generate: (x: string) => T): Ma
     return glob
       .sync(`${src}/**/*`)
       .map(filename => path.resolve(filename))
-      .reduce((tx, curPath) => {
-        const fileName = path.basename(curPath, path.extname(curPath));
-        const key = toCase(StringCases.camelCase, fileName);
+      .reduce(
+        (tx, curPath) => {
+          const fileName = path.basename(curPath, path.extname(curPath));
+          const key = toCase(StringCases.camelCase, fileName);
 
-        return { ...tx, [key]: generateMappable(curPath, generate) };
-      }, {});
+          return { ...tx, [key]: generateMappable(curPath, generate) };
+        },
+        {});
   }
 
   return generate(src);
