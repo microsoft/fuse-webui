@@ -4,8 +4,9 @@
     "module": "commonjs",
     "target": "es2016",
     "outDir": "./built",
+    "declaration": true,
     "typeRoots": ["../../node_modules/@types", "../node_modules/@types", "./node_modules/@types"],
-    "types": ["node", "underscore"]
+    "types": ["node", "underscore"],
   },
   "exclude": ["node_modules", "../node_modules"]
 }

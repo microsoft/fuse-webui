@@ -1,6 +1,6 @@
 {
   "name": "@fuselab/cli-utils",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "",
   "main": "built/index.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "build-prod": "tsc",
     "tslint": "tslint -c tslint.json -t stylish --project tsconfig.json"
   },
+  "types": "built/index.d.ts",
   "jest": {
     "moduleFileExtensions": [
       "ts",
