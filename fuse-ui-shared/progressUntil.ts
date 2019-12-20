@@ -7,13 +7,13 @@ export enum ActionNames {
 }
 
 //tslint:disable:no-reserved-keywords
-export interface WatchProgress {
+export interface WatchProgress extends Action {
   type: ActionNames.watch;
   pattern: string;
   onProgress(action: Action);
 }
 
-export interface UnwatchProgress {
+export interface UnwatchProgress extends Action {
   type: ActionNames.unwatch;
   pattern: string;
 }
@@ -23,7 +23,7 @@ function* waitFor(pattern: string) {
 }
 
 function* waitForOnly(pattern: string, filter: (x: Action) => boolean) {
-  for (; ;) {
+  for (;;) {
     const action = yield take(pattern);
     if (filter(action)) {
       break;
@@ -34,7 +34,7 @@ function* waitForOnly(pattern: string, filter: (x: Action) => boolean) {
 export function* progressUntil(action: WatchProgress): any {
   const { progress } = yield race({
     progress: call(waitFor, action.pattern),
-    unwatch: call(waitForOnly, ActionNames.unwatch, x => x.pattern === action.pattern)
+    unwatch: call(waitForOnly, ActionNames.unwatch, x => (<UnwatchProgress>x).pattern === action.pattern)
   });
 
   if (progress) {

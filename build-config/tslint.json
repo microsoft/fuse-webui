@@ -22,7 +22,7 @@
     "no-inferrable-types": [
       false
     ],
-    "no-unused-variable": true,
+    "no-unused-variable": false,
     "linebreak-style": false,
     "interface-name": false,
     "missing-jsdoc": false,

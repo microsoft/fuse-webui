@@ -15,7 +15,10 @@ export interface WithAuthAttributes {
 
 export type WithAuthProps = WithAuthAttributes & WithAuthActions;
 
-export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentClass<P & WithAuthProps>, ...roles: string[]) =>
+export const withAuth = <P extends WithRouter<Object>>(
+  Inner: React.ComponentClass<P & WithAuthProps>,
+  ...roles: string[]
+) =>
   class WithAuth extends React.Component<P & WithAuthProps> {
     public render(): JSX.Element {
       if (this.props.user || (this.props.isLogin && this.props.isLogin(this.props.history))) {
@@ -48,10 +51,9 @@ export const withAuth = <P extends WithRouter<Object>>(Inner: React.ComponentCla
       };
     }
 
-    private get authorized(): boolean {
+    get authorized(): boolean {
       const userRoles = (this.props.user ? this.props.user.roles : []) || [];
 
-      return this.props.user &&
-        (roles.length === 0 || !!roles.find(x => userRoles.indexOf(x) >= 0));
+      return this.props.user && (roles.length === 0 || !!roles.find(x => userRoles.indexOf(x) >= 0));
     }
   };

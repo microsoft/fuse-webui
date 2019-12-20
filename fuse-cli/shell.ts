@@ -1,5 +1,4 @@
 import { SpawnOptions } from 'child_process';
-import { runInNewContext } from 'vm';
 
 export type CliContext = { maxSuccessCode?: number } & SpawnOptions;
 export type CliInvoke = [CliContext, string];
@@ -56,7 +55,7 @@ export const playBackShell = (input: CliInvoke[], output: string[]) => {
   };
 
   return async script => {
-    const result = await shell(checkActor)(script);
+    await shell(checkActor)(script);
     if (!outputStream.next().done) {
       throw new Error('output not drained');
     }
@@ -64,7 +63,5 @@ export const playBackShell = (input: CliInvoke[], output: string[]) => {
     if (!inputStream.next().done) {
       throw new Error('input not drained');
     }
-
-    return result;
   };
 };

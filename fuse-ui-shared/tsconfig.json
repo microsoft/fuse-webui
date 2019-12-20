@@ -2,7 +2,7 @@
   "extends": "@fuselab/build-config/tsconfig.react.json",
   "compilerOptions": {
     "module": "amd",
-    "outDir": "./lib",
+    "outDir": "./built",
     "typeRoots": [
       "../../node_modules/@types",
       "../node_modules/@types",
@@ -10,7 +10,7 @@
     ]
   },
   "exclude": [
-    "lib",
+    "built",
     "i18n/sample",
     "node_modules",
     "../node_modules"

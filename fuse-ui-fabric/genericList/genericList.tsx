@@ -1,4 +1,4 @@
-import { BaseComponent } from '@uifabric/utilities/lib';
+import { BaseComponent, IBaseProps } from '@uifabric/utilities/lib';
 import { DetailsList, IDetailsListProps } from 'office-ui-fabric-react/lib-commonjs/DetailsList';
 import * as React from 'react';
 import { asyncState } from '../decorators/asyncState';
@@ -20,9 +20,10 @@ export interface ListActions<T> {
   filterBy(asyncKey: Symbol, key: keyof T, val: any);
 }
 
-export type ListBaseProps<T> = ListAttributes<T> & ListActions<T>;
+export type ListBaseProps<T> = ListAttributes<T> & ListActions<T> & IBaseProps;
 
-export type ListProps<T> = ListBaseProps<T> & WithRouter<ListBaseProps<T>> &
+export type ListProps<T> = ListBaseProps<T> &
+  WithRouter<ListBaseProps<T>> &
   //tslint:disable-next-line
   ({ componentRef?: (x: IAsyncComponent) => void } | IDetailsListProps);
 
@@ -41,9 +42,7 @@ export class GenericList<T> extends BaseComponent<ListProps<T>, AsyncComponentSt
 
     return (
       <section>
-        <DetailsList
-          {...listProps}
-        />
+        <DetailsList {...listProps} />
         {this.renderLoading()}
       </section>
     );

@@ -14,7 +14,7 @@ export function closest(element: HTMLElement, sel: string): HTMLElement {
     const cur = iter.value;
     const m = cur.querySelector(sel);
     if (m) {
-      return <any>m;
+      return m;
     }
     iter = a.next();
   }
