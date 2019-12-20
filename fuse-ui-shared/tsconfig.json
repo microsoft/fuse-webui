@@ -2,7 +2,7 @@
   "extends": "@fuselab/build-config/tsconfig.react.json",
   "compilerOptions": {
     "module": "amd",
-    "outDir": "./built",
+    "outDir": "./lib",
     "typeRoots": [
       "../../node_modules/@types",
       "../node_modules/@types",

@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
+    "build": "npm run build-all",
     "build-node": "tsc -p tsconfig.node.json",
     "build-all": "webpack & npm run build-node",
     "build-prod": "npm run build-node",
