@@ -33,10 +33,10 @@
     "@uifabric/utilities": "^5.19.0",
     "handlebars": "^4.0.13",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.1.4",
+    "jest": "25.1.0",
     "office-ui-fabric-react": "6.211.0",
     "react": "16.8.3",
-    "react-dom": "^16.8.3",
-    "ts-jest": "^22.0.1"
+    "react-dom": "16.8.3",
+    "ts-jest": "25.1.0"
   }
 }
