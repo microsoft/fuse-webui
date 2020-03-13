@@ -25,6 +25,7 @@ export type CodeKind = 'app' | 'action' | 'component' | 'cli';
 export interface ARGV {
   kind: CodeKind;
   appName: string;
+  dest: string;
 }
 
 export async function handler(argv: ARGV & Arguments): Promise<string> {
