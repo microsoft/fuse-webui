@@ -13,5 +13,5 @@ function* dumpStrings(map: LocalizedStrings): IterableIterator<string> {
 }
 
 export function* checkStrings() {
-  yield* dumpStrings(Strings);
+  yield* dumpStrings(<any>Strings);
 }

@@ -2,7 +2,8 @@ import * as stringCases from '@fuselab/ui-shared/lib/stringCases';
 import { Answers, prompt, Question } from 'inquirer';
 import * as _ from 'underscore';
 import { Arguments, Options } from 'yargs';
-import * as yargs from 'yargs/yargs';
+// tslint:disable-next-line:no-duplicate-imports
+import * as yargs from 'yargs';
 import { readFileAsObj } from './utils';
 export type YargOptions = { [option: string]: Options };
 
@@ -19,7 +20,7 @@ export async function parseAgainstConfig(
   cli: string,
   promptOverride?: (questions: Question[]) => Promise<Answers>): Promise<Arguments> {
   const options = await readFileAsObj<YargOptions>(configPath);
-  const args = yargs().exitProcess(false).fail(ignoreFailure).option(options).parse(cli);
+  const args = yargs.exitProcess(false).fail(ignoreFailure).option(options).parse(cli);
   const keys = Object.keys(options);
   const missingKeys = keys.filter(key => !args[key]);
 

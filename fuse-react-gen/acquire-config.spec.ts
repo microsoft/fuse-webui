@@ -1,12 +1,11 @@
 ///<reference types='jasmine'/>
 import { Question } from 'inquirer';
-import * as yargs from 'yargs/yargs';
 import { parseAgainstConfig } from './acquire-config';
 
 describe('acquire-config', () => {
   it('parses yargs', async () => {
     const cli = '-a appName -p 4567';
-    const args = await parseAgainstConfig('./examples/{{app}}/.react-gen-rc.json', cli,
+    const args: any = await parseAgainstConfig('./examples/{{app}}/.react-gen-rc.json', cli,
       questions => Promise.resolve({
         version: '1.4.0.2',
         package: '@mock/module',

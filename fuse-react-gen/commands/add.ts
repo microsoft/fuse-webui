@@ -4,10 +4,11 @@ import * as glob from 'glob';
 import { basename, resolve } from 'path';
 import * as _ from 'underscore';
 import { Arguments } from 'yargs';
-import * as yargs from 'yargs/yargs';
+// tslint:disable-next-line:no-duplicate-imports
+import * as yargs from 'yargs';
 import { parseAgainstConfig } from '../acquire-config';
 import logger from '../logger';
-import { generateTransformSync, init, transformFile, transformFolder } from '../transform';
+import { Data, generateTransformSync, init, transformFile, transformFolder } from '../transform';
 import { ensurePath, isDir } from '../utils';
 
 export const command = 'add';
@@ -40,7 +41,7 @@ export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise
     const configPath = resolve(source, '.react-gen-rc.json');
     logger.verbose(`configPath = ${configPath}`);
     if (existsSync(configPath)) {
-      const config: Arguments = {
+      const config: Arguments & { _react_gen_target: string[] | string } = <any>{
         ...helpers,
         ...(await parseAgainstConfig(configPath, (extra || process.argv).join(' ')))
       };
@@ -55,14 +56,14 @@ export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise
         const transformedSource = _.template(source)(data);
         realTarget = transformedSource !== source ? resolve(target, basename(transformedSource)) : target;
         logger.info(`genTarget = ${genTarget} isFolder=${isFolder}`);
-        const targetFiles = isFolder
+        const targetFiles = typeof (genTarget) !== 'string'
           ? genTarget.reduce((cur, x) => ({ ...cur, [x]: resolve(realTarget, _.template(x)(data)) }), {})
           : {
-              [genTarget]: isDir(target) ? resolve(realTarget, _.template(genTarget)(data)) : realTarget
-            };
+            [genTarget]: isDir(target) ? resolve(realTarget, _.template(genTarget)(data)) : realTarget
+          };
 
         ensurePath(realTarget);
-        const srcTargets = isFolder ? genTarget : [genTarget];
+        const srcTargets = typeof genTarget !== 'string' ? genTarget : [genTarget];
         for (const gen of srcTargets) {
           logger.info(`gen = ${gen} src = ${resolve(source, gen)}, target = ${targetFiles[gen]}`);
           await transformFile(data, resolve(source, gen), targetFiles[gen]);
@@ -75,12 +76,12 @@ export async function handler(argv: ARGV & Arguments, extra?: string[]): Promise
         logger.info(`${x} created`);
       });
     } else {
-      const config = yargs().parse(argv._);
+      const config = <Data>yargs.parse(argv._);
       await transformFile(config, source, target);
       logger.info(`${target} created`);
     }
   } else {
-    const config = yargs().parse(argv._);
+    const config = <Data>yargs.parse(argv._);
     await transformFile(config, source, target);
     logger.info(`${target} created`);
   }
