@@ -15,9 +15,6 @@
   },
   "author": "hailiu@microsoft.com",
   "license": "MIT",
-  "dependencies": {
-    "lerna": "~2.10.0"
-  },
   "false": {},
   "repository": {
     "type": "git",
@@ -36,6 +33,7 @@
     "handlebars": "^4.0.13",
     "identity-obj-proxy": "^3.0.0",
     "jest": "25.1.0",
+    "lerna": "^3.19.0",
     "office-ui-fabric-react": "6.211.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
