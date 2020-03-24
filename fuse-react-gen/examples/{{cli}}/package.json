@@ -40,7 +40,7 @@
     "inquirer": "^6.2.1",
     "rimraf": "^2.6.2",
     "underscore": "^1.8.3",
-    "yargs": "^8.0.2"
+    "yargs": "15.2.0"
   },
   "devDependencies": {
     "@fuselab/build-config": "^1.0.0",
