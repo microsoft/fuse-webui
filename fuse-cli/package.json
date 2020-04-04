@@ -43,7 +43,7 @@
     "tslint": "5.15.0",
     "tslint-microsoft-contrib": "~5.0.2",
     "typescript": "3.7.3",
-    "webpack": "^4.30.0",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.2.1"
   },
   "publishConfig": {
