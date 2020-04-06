@@ -80,7 +80,7 @@
     "typescript": "3.7.3",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "underscore": "^1.8.3",
-    "webpack": "^4.30.0",
+    "webpack": "^4.42.1",
     "webpack-assets-manifest": "^1.0.0",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.1",
