@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { commandDir, scriptName } from 'yargs';
+import { scriptName } from 'yargs';
 
 //tslint:disable-next-line:no-unused-variable
 const _dummy = scriptName('fuse-gen')

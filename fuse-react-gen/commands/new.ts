@@ -45,7 +45,7 @@ export async function handler(argv: ARGV & Arguments): Promise<string> {
     }
   };
 
-  const source = resolve(argv.$0, `../../${addSource[kind].source}`);
+  const source = resolve(__dirname, `../../${addSource[kind].source}`);
   const target = resolve('.', dest);
   const addArgv = { source, target, $0: argv.$0, _: [] };
 
