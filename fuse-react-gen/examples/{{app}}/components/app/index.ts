@@ -1,5 +1,5 @@
 import { login } from '@fuselab/ui-fabric/lib/actions';
-import { WithAuthActions } from '@fuselab/ui-fabric/lib/withAuth';
+import { WithAuthActions } from '@fuselab/ui-fabric/lib/withAuth/withAuth';
 import { withRouter } from '@fuselab/ui-fabric/lib/withRouter';
 import { connect, Dispatch } from 'react-redux';
 import { Store } from '../../store';

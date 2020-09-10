@@ -1,7 +1,7 @@
 /* tslint:disable:no-use-before-declare */
 import { MainNav, Waffle } from '@fuselab/ui-fabric/lib/mainNav';
 import { initFontFaces, invertTheme, loadPreference } from '@fuselab/ui-fabric/lib/themes';
-import { WithAuthActions, WithAuthAttributes } from '@fuselab/ui-fabric/lib/withAuth';
+import { WithAuthActions, WithAuthAttributes } from '@fuselab/ui-fabric/lib/withAuth/withAuth';
 import { initializeIcons } from '@uifabric/icons';
 import { Fabric } from 'office-ui-fabric-react/lib-commonjs/Fabric';
 import * as React from 'react';
