@@ -11,6 +11,11 @@
     "build-prod": "npm run build-node",
     "tslint": "tslint -c tslint.json -t stylish --project tsconfig.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fuse-webui.git",
+    "directory": "fuse-ui-fabric"
+  },
   "jest": {
     "moduleFileExtensions": [
       "ts",
