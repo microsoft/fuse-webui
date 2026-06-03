@@ -1,4 +1,8 @@
 
+# Project Deprecation Notice
+
+This project has been deprecated  and is no longer maintained. As such, making use of the code herein is discouraged, as it may contain vulnerabilities that will not be fixed.
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
