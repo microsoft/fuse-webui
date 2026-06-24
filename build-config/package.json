@@ -9,6 +9,11 @@
     "build": "echo no build",
     "build-all": "echo no build-all"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fuse-webui.git",
+    "directory": "build-config"
+  },
   "author": "hailiu@gmail.com",
   "license": "MS-PL"
 }
